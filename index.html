@@ -1519,33 +1519,140 @@ body.t-hero-small .hero-copy { font-size: clamp(30px, 5vw, 46px); line-height: 1
    ═══════════════════════════════════════════ */
 @media (max-width: 768px) {
   .nav { padding: 16px 20px; }
-  .nav-links { gap: 16px; }
-  .nav-links a { font-size: 10px; }
+  .nav-links { display: none; }
   .lang-toggle { left: 20px; top: 16px; }
-  .section { padding: 72px 20px; }
-  .hero-overlay { padding: 40px 20px 36px; }
-  .profile-grid { grid-template-columns: 1fr; gap: 32px; }
-  .salon-grid { grid-template-columns: 1fr; }
-  .sticker-section { grid-template-columns: 1fr; gap: 32px; }
-  .float-actions { bottom: 20px; right: 16px; width: 110px; }
-  .float-btn { padding: 8px 0; font-size: 9px; }
-  .review-badge { bottom: 20px; left: 20px; font-size: 10px; padding: 6px 10px; }
+
+  /* Section vertical rhythm — UNIFIED 96px top/bottom for all sections */
+  .section { padding: 96px 36px; }
+  .section-spacious { padding: 96px 36px; }
+  .section-label { font-size: 9px; letter-spacing: 0.32em; margin-bottom: 40px; }
+
+  .hero-overlay { padding: 56px 24px 56px; }
+
+  /* Profile / Salon / Sticker — uniform 36px grid gap, unified content max-widths */
+  .profile-grid { grid-template-columns: 1fr; gap: 36px; place-items: center; }
+  .profile-grid > * { width: 100%; max-width: 220px; }
+  .profile-img-placeholder { max-width: 180px; }
+  .profile-name { font-size: 13.5px; }
+  .profile-role { font-size: 10px; margin-bottom: 24px; }
+  .profile-bio { font-size: 11.5px; line-height: 2; }
+  .profile-bio-en { font-size: 11.5px; line-height: 1.85; margin-top: 24px; }
+  .profile-tags { font-size: 9.5px; margin-top: 24px; }
+  .profile-facts { margin-top: 32px; padding-top: 24px; }
+  .fact-num { font-size: 17px; }
+  .fact-label { font-size: 9.5px; }
+  .fact-item { margin-bottom: 12px; }
+  .fact-line { font-size: 10.5px; }
+
+  .salon-grid { grid-template-columns: 1fr; gap: 36px; place-items: center; margin-top: 24px; }
+  .salon-grid > * { width: 100%; max-width: 220px; }
+  /* First salon image (interior, 4:3) */
+  .salon-grid > .salon-img-placeholder:first-child { max-width: 200px; aspect-ratio: 4/3; height: auto; }
+  /* Second salon image (Keraffect, override inline width:282px and tall aspect) */
+  .salon-grid > .salon-img-placeholder:nth-child(2) {
+    width: 180px !important;
+    max-width: 180px !important;
+    height: auto !important;
+    aspect-ratio: 4/5;
+  }
+  .salon-grid > .salon-img-placeholder:nth-child(2) img {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .sticker-section { grid-template-columns: 1fr; gap: 36px; place-items: center; }
+  .sticker-section > * { width: 100%; max-width: 240px; }
+  .sticker-img-placeholder, .sticker-video, .sticker-poster { max-width: 220px; }
+
+  /* Service menu — 3-col grid for uniform price alignment */
+  .menu-item {
+    display: grid;
+    grid-template-columns: 20px 1fr 64px;
+    column-gap: 12px;
+    align-items: baseline;
+    padding: 22px 0;
+  }
+  .menu-num { font-size: 9px; min-width: 0; margin-right: 0; }
+  .menu-name { font-size: 12.5px; }
+  .menu-desc { font-size: 10.5px; }
+  .menu-price { font-size: 11px; margin-left: 0; text-align: right; font-variant-numeric: tabular-nums; }
+  .menu-note { font-size: 9.5px; margin-top: 28px; padding-top: 20px; }
+
+  /* Mood Curator — unified 96px padding */
+  .mc-section { padding: 96px 36px; }
+  .mc-hl { font-size: clamp(18px, 4vw, 22px) !important; }
+  .mc-desc { font-size: 11px !important; }
+  .mc-inner { gap: 20px !important; }
+
+  /* Booking CTA — unified 96px padding */
+  .booking { padding: 96px 36px; }
+  .booking-hl { font-size: 21px; margin-bottom: 14px; }
+  .booking-sub { font-size: 11.5px; margin-bottom: 32px; }
+
+  /* Float actions — minimal icon-only FAB on mobile */
+  .float-actions {
+    bottom: 16px; right: 16px;
+    width: auto;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-end;
+  }
+  .float-btn {
+    width: 44px; height: 44px;
+    padding: 0;
+    border-radius: 50%;
+    justify-content: center;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+  }
+  .float-btn span { display: none; }
+  .float-btn svg { width: 16px; height: 16px; }
+
+  /* BA gallery — keep swipe hint visible */
+  .ba-gallery::after { width: 30px; }
+  .ba-scroll-hint { font-size: 9px; }
+  .ba-card { width: 170px; }
+
+  .review-badge { bottom: 20px; left: 16px; font-size: 10px; padding: 6px 10px; }
   .review-panel { width: 100%; border-radius: 12px 12px 0 0; }
-  .footer-links { flex-wrap: wrap; justify-content: center; }
+  .footer-links { flex-wrap: wrap; justify-content: center; font-size: 11px; }
 }
 
 @media (max-width: 480px) {
-  /* nav-brand sized via .nav-brand-logo above */
-  .nav-links a { font-size: 9px; letter-spacing: 0.14em; }
-  .hero-copy { font-size: 26px; }
-  .section-spacious { padding-top: 120px; padding-bottom: 120px; }
-  .section { padding: 100px 20px; }
-  .mc-preview { grid-template-columns: repeat(2, 1fr); }
-  .ba-card { width: 200px; }
+  .hero-copy { font-size: 19px; }
+  .hero-sub { font-size: 11.5px; }
+  /* Unified 88px top/bottom on all sections */
+  .section { padding: 88px 28px; }
+  .section-spacious { padding: 88px 28px; }
+  .mc-section { padding: 88px 28px; }
+  .booking { padding: 88px 28px; }
+  .mc-preview {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    max-width: 100%;
+  }
+  .mc-card {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 12px 16px;
+    gap: 14px;
+  }
+  /* Fixed icon column — labels start at uniform x position */
+  .mc-card-icon {
+    width: 52px;
+    height: 20px;
+    flex-shrink: 0;
+    justify-content: flex-start;
+  }
+  .mc-card-label { font-size: 10.5px; letter-spacing: 0.08em; }
   .mc-desc { white-space: normal; }
-  .booking-hl { font-size: 24px; }
+  .booking-hl { font-size: 19px; }
   .booking-buttons { flex-direction: column; align-items: center; }
-  .book-btn { width: 100%; max-width: 280px; text-align: center; }
+  .book-btn { width: 100%; max-width: 240px; text-align: center; font-size: 10.5px; }
+  .ba-card { width: 160px; }
+
+  /* Menu — adjust grid for narrowest screens */
+  .menu-item { grid-template-columns: 18px 1fr 60px; column-gap: 10px; }
 }
 
 /* ═══════════════════════════════════════════
