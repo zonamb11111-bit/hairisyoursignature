@@ -11,12 +11,12 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hairisyoursignature.jp/"/>
   </url>
   <url>
-    <loc>https://www.hairisyoursignature.jp/koenji-guide.html</loc>
+    <loc>https://www.hairisyoursignature.jp/koenji-guide</loc>
     <lastmod>2026-04-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.hairisyoursignature.jp/koenji-guide.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://www.hairisyoursignature.jp/koenji-guide.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hairisyoursignature.jp/koenji-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.hairisyoursignature.jp/koenji-guide?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.hairisyoursignature.jp/koenji-guide?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hairisyoursignature.jp/koenji-guide"/>
   </url>
 </urlset>
