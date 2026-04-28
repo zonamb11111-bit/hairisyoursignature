@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://www.hairisyoursignature.jp/</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.hairisyoursignature.jp/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.hairisyoursignature.jp/?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hairisyoursignature.jp/"/>
+  </url>
+  <url>
+    <loc>https://www.hairisyoursignature.jp/koenji-guide.html</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.hairisyoursignature.jp/koenji-guide.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.hairisyoursignature.jp/koenji-guide.html?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.hairisyoursignature.jp/koenji-guide.html"/>
+  </url>
+</urlset>

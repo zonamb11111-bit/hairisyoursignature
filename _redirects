@@ -1,0 +1,28 @@
+# Cloudflare Pages redirect rules — proper 301s for SEO continuity from old Wix URLs.
+# Format: <from>  <to>  <status>
+# Docs: https://developers.cloudflare.com/pages/configuration/redirects/
+
+# Booking aliases (cross-domain → kommons-booking)
+/booking          https://zonamb11111-bit.github.io/kommons-booking/  301
+/book-online      https://zonamb11111-bit.github.io/kommons-booking/  301
+/ja/booking       https://zonamb11111-bit.github.io/kommons-booking/  301
+/ja/book-online   https://zonamb11111-bit.github.io/kommons-booking/  301
+
+# Mood Curator (cross-domain → find subdomain)
+/moodcurator      https://find.hairisyoursignature.jp/  301
+/ja/moodcurator   https://find.hairisyoursignature.jp/  301
+
+# llms.txt aliases
+/llms-txt         /llms.txt  301
+/ja/llms-txt      /llms.txt  301
+
+# Japanese root — single-page LP auto-detects, but force lang=ja for explicit links
+/ja               /?lang=ja  301
+
+# Section anchors (FAQ etc.)
+/faq              /#faq          301
+/ja/faq           /?lang=ja#faq  301
+
+# Apex (non-www) → www  (canonical preservation)
+# Note: also enforced by Cloudflare DNS settings; this is a belt-and-suspenders
+# https://hairisyoursignature.jp/*  https://www.hairisyoursignature.jp/:splat  301
