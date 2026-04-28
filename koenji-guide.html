@@ -744,13 +744,16 @@ const markerEls = [];
 const markers = [];
 
 // Public Mapbox token (pk.*) — exposure is expected for client-side maps.
-// SECURITY: This token is restricted via URL allowlist in the Mapbox dashboard
-// (https://account.mapbox.com/access-tokens). Allowed origins must include:
+// SECURITY: This token is URL-allowlisted in the Mapbox dashboard
+// (https://account.mapbox.com/access-tokens). Restricted to:
 //   - https://www.hairisyoursignature.jp/*
 //   - https://hairisyoursignature.jp/*
-//   - http://localhost:* (for local preview only — remove before launch if unused)
-// If the token is ever leaked or used outside these origins, rotate it from the dashboard.
-mapboxgl.accessToken = 'pk.eyJ1Ijoiem9uYW1iIiwiYSI6ImNtbm5iMXd5cTFzNGsycXEyaTRoajY2bnoifQ._SDgoTcSXO69Om5R_RYvkQ';
+//   - https://*.pages.dev/*       (Cloudflare Pages preview URLs)
+//   - http://localhost:*           (local development)
+// Scopes: Styles:Read, Tiles:Read, Fonts:Read, Datasets:Read, Vision:Read (read-only).
+// Token name: hairisyoursignature-koenji-guide
+// If leaked, rotate from the dashboard — the old token in default-public continues to work for other apps.
+mapboxgl.accessToken = 'pk.eyJ1Ijoiem9uYW1iIiwiYSI6ImNtb2lqbHNiejAzMHEyb3IxNmM1OTF6aWMifQ.xAzAWSN_1ZFBESTWb0h-Pg';
 
 const map = new mapboxgl.Map({
   container: 'map',
