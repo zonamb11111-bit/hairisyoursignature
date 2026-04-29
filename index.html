@@ -1090,6 +1090,10 @@ body.t-hero-small .hero-copy { font-size: clamp(30px, 5vw, 46px); line-height: 1
 }
 .voice-link:hover { color: var(--text); }
 
+/* Mobile-only line break helper — visible on mobile, hidden on desktop */
+.br-mobile { display: none; }
+@media (max-width: 480px) { .br-mobile { display: inline; } }
+
 /* ── Mood Curator Section — gradient + preview cards ── */
 .mc-section {
   background: linear-gradient(135deg, #1C1C1A 0%, #2A2520 40%, #1C1C1A 100%);
@@ -2308,7 +2312,7 @@ body.t-sticker-poster .sticker-poster { display: flex !important; }
     <h2 class="mc-hl lang-en">Not sure what you need?</h2>
     <h2 style="display:none;" class="mc-hl lang-jp">メニューに迷ったら？</h2>
     <p class="mc-desc lang-en">Your mood, instincts, and style — turned into a direction in 3 minutes.</p>
-    <p style="display:none;" class="mc-desc lang-jp">着ているもの、日々の気分、直感から、スタイルの方向性を見つける診断。</p>
+    <p style="display:none;" class="mc-desc lang-jp">着ているもの、日々の気分、直感から、<br class="br-mobile">スタイルの方向性を見つける診断。</p>
 
     <div class="mc-preview" id="mc-cards">
       <div class="mc-card" style="transition-delay:0.1s">
