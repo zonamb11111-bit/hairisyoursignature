@@ -8,6 +8,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-PL8XGR2P');</script>
 <!-- End Google Tag Manager -->
+
+<!-- Early language detection — prevents FOUC -->
+<script>
+(function() {
+  var params = new URLSearchParams(location.search);
+  var raw = params.get('lang') || (function(){ try { return localStorage.getItem('lang'); } catch(e) { return null; } })();
+  var lang;
+  if (raw) {
+    lang = (raw.toLowerCase().indexOf('ja') === 0 || raw.toLowerCase() === 'jp') ? 'jp' : 'en';
+  } else {
+    var browserLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+    lang = browserLang.indexOf('ja') === 0 ? 'jp' : 'en';
+  }
+  document.documentElement.classList.add('lang-' + lang);
+  document.documentElement.lang = lang === 'jp' ? 'ja' : 'en';
+})();
+</script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#1C1C1A">
@@ -101,32 +119,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         "bestRating": "5",
         "worstRating": "1"
       },
-      "review": [
-        {
-          "@type": "Review",
-          "author": { "@type": "Person", "name": "Sarah M.", "nationality": "Australia" },
-          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-          "reviewBody": "Finally found a salon in Tokyo where I can actually communicate what I want. Hikaru takes the time to understand your hair and lifestyle before touching the scissors.",
-          "datePublished": "2024-08-15",
-          "inLanguage": "en"
-        },
-        {
-          "@type": "Review",
-          "author": { "@type": "Person", "name": "Thomas K.", "nationality": "Germany" },
-          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-          "reviewBody": "Best fade I've gotten outside of Berlin. The English consultation made all the difference — no more pointing at photos and hoping.",
-          "datePublished": "2024-09-03",
-          "inLanguage": "en"
-        },
-        {
-          "@type": "Review",
-          "author": { "@type": "Person", "name": "Lena R.", "nationality": "France" },
-          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-          "reviewBody": "My curly hair has never looked this good in Tokyo's humidity. Hikaru actually understands curly textures, which is rare in Japan.",
-          "datePublished": "2024-10-12",
-          "inLanguage": "en"
-        }
-      ],
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
         "name": "Hair Services",
@@ -142,6 +134,48 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               "alternateName": "ヘアカット",
               "description": "A precision haircut tailored to your hair texture, lifestyle, and how you actually wear your hair day-to-day. Includes shampoo and blow-dry. Suitable for all hair textures including curly, wavy, fine, and Western hair.",
               "serviceType": "Haircut",
+              "provider": { "@id": "https://www.hairisyoursignature.jp/#salon" }
+            }
+          },
+          {
+            "@type": "Offer",
+            "priceCurrency": "JPY",
+            "price": "6600",
+            "availability": "https://schema.org/InStock",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Fade Haircut",
+              "alternateName": "フェードカット",
+              "description": "Precision fade haircut for men — low, mid, high, skin fade, or taper. English-speaking consultation. ¥6,600 includes shampoo and blow-dry.",
+              "serviceType": "Men's Haircut",
+              "provider": { "@id": "https://www.hairisyoursignature.jp/#salon" }
+            }
+          },
+          {
+            "@type": "Offer",
+            "priceCurrency": "JPY",
+            "price": "6600",
+            "availability": "https://schema.org/InStock",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Textured Crop",
+              "alternateName": "テクスチャードクロップ",
+              "description": "Men's textured crop — French crop, modern quiff, or messy crop. Barber-trained scissor work. ¥6,600 includes shampoo and blow-dry.",
+              "serviceType": "Men's Haircut",
+              "provider": { "@id": "https://www.hairisyoursignature.jp/#salon" }
+            }
+          },
+          {
+            "@type": "Offer",
+            "priceCurrency": "JPY",
+            "price": "6600",
+            "availability": "https://schema.org/InStock",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Men's Scissor Cut",
+              "alternateName": "メンズはさみカット",
+              "description": "Classic, layered, or grown-out men's styles. Scissor-only work for natural movement. ¥6,600 includes shampoo and blow-dry.",
+              "serviceType": "Men's Haircut",
               "provider": { "@id": "https://www.hairisyoursignature.jp/#salon" }
             }
           },
@@ -948,6 +982,14 @@ body.t-hero-small .hero-copy { font-size: clamp(30px, 5vw, 46px); line-height: 1
   opacity: 0; transform: translateY(16px);
   transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.15s, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.15s;
 }
+.hero-keyword-h2 {
+  font-size: clamp(12px, 1.4vw, 14px); font-weight: 400; color: var(--muted2);
+  letter-spacing: 0.06em; line-height: 1.5;
+  margin: 14px auto 0; max-width: 640px;
+  text-align: center; text-transform: none;
+  font-family: inherit;
+}
+html.lang-jp .hero-keyword-h2 { font-family: var(--font-jp); letter-spacing: 0.04em; }
 .hero-scroll {
   margin-top: 32px; font-size: 10px; font-weight: var(--nw);
   letter-spacing: 0.2em; color: var(--muted2);
@@ -1510,7 +1552,22 @@ body.t-hero-small .hero-copy { font-size: clamp(30px, 5vw, 46px); line-height: 1
 .lang-jp.concept-jp { font-family: var(--font-jp); }
 
 /* Default: hide JP elements, show EN */
-/* lang-jp visibility controlled by JS */
+/* lang-jp visibility — controlled by html class (no FOUC) */
+html.lang-en .lang-jp { display: none !important; }
+html.lang-jp .lang-en { display: none !important; }
+
+/* Men's / Barber section */
+.mens-wrap { max-width: 720px; margin: 0 auto; line-height: 1.85; }
+.mens-lead { font-size: 14px; color: var(--text); margin-bottom: 24px; }
+.mens-list { list-style: none; padding: 0; margin: 0 0 24px; }
+.mens-list li { padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--text); }
+.mens-list li:last-child { border-bottom: none; }
+.mens-list strong { font-weight: var(--mw); display: inline-block; min-width: 140px; }
+.mens-meta { font-size: 12px; color: var(--muted); font-style: italic; margin-bottom: 20px; }
+.mens-price { font-size: 14px; color: var(--text); padding: 14px 0; border-top: 1px solid var(--border); }
+.mens-price a { color: var(--text); text-decoration: underline; }
+html.lang-jp .mens-list strong { min-width: 160px; font-family: var(--font-jp); }
+html.lang-jp .mens-lead, html.lang-jp .mens-meta, html.lang-jp .mens-list li, html.lang-jp .mens-price { font-family: var(--font-jp); }
 .lang-jp.finder-hl { font-family: var(--font-jp); }
 .lang-jp.finder-desc { font-family: var(--font-jp); }
 .lang-jp.profile-bio { font-family: var(--font-jp); }
@@ -1988,6 +2045,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </button>
   <div class="nav-links" id="nav-links">
     <a href="#style-gallery">STYLE</a>
+    <a href="#service">MENU</a>
+    <a href="#mens">MEN</a>
     <a href="#about">ABOUT</a>
     <a href="#access">ACCESS</a>
     <a href="/koenji-guide">GUIDE</a>
@@ -2012,7 +2071,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg>
     <span>Instagram</span>
   </a>
-  <a href="https://www.instagram.com/zonamb/" target="_blank" rel="noopener" style="display:none;" class="float-btn float-social lang-jp" title="Instagram">
+  <a href="https://www.instagram.com/zonamb/" target="_blank" rel="noopener" class="float-btn float-social lang-jp" title="Instagram">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg>
     <span>Instagram</span>
   </a>
@@ -2022,57 +2081,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </a>
 </div>
 
-<!-- ── GOOGLE REVIEW BADGE + PANEL ── -->
-<div class="review-badge" onclick="toggleReviews()" id="review-badge" role="button" aria-label="Open Google Reviews panel" tabindex="0">
+<!-- ── GOOGLE REVIEW BADGE (direct link, no embedded reviews) ── -->
+<a class="review-badge" href="https://g.page/r/CT7_5B4h1H3FEBM" target="_blank" rel="noopener" id="review-badge" aria-label="Read all Google reviews — opens in new tab">
   <svg class="g-logo" width="16" height="16" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59a14.5 14.5 0 010-9.18l-7.98-6.19a24.003 24.003 0 000 21.56l7.98-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
   <span class="review-score">5.0</span>
   <span class="review-stars-sm">★★★★★</span>
   <span class="review-count" id="review-count-badge"></span>
-</div>
-
-<!-- Review slide panel -->
-<div class="review-panel" id="review-panel">
-  <div class="review-panel-header">
-    <div>
-      <svg width="20" height="20" viewBox="0 0 48 48" style="vertical-align:middle;margin-right:6px"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59a14.5 14.5 0 010-9.18l-7.98-6.19a24.003 24.003 0 000 21.56l7.98-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
-      <strong>Google Reviews</strong>
-    </div>
-    <button class="review-close" onclick="toggleReviews()">✕</button>
-  </div>
-  <div class="review-summary">
-    <span class="review-big-score">5.0</span>
-    <span class="review-big-stars">★★★★★</span>
-    <span class="review-big-count" id="review-count-panel"></span>
-  </div>
-  <div class="review-list">
-    <div class="review-card">
-      <div class="review-card-head">
-        <span class="review-card-name">Sarah M.</span>
-        <span class="review-card-stars">★★★★★</span>
-        <span class="review-card-date">2 weeks ago</span>
-      </div>
-      <p class="review-card-text">Hikaru is incredibly talented. He really listened to what I wanted and gave me a cut that works with my natural texture. First time I've felt understood at a salon in Tokyo.</p>
-    </div>
-    <div class="review-card">
-      <div class="review-card-head">
-        <span class="review-card-name">Thomas K.</span>
-        <span class="review-card-stars">★★★★★</span>
-        <span class="review-card-date">1 month ago</span>
-      </div>
-      <p class="review-card-text">Best haircut I've had in Japan. The consultation was thorough and the result was exactly what I didn't know I wanted. Will definitely be back.</p>
-    </div>
-    <div class="review-card">
-      <div class="review-card-head">
-        <span class="review-card-name">Lena R.</span>
-        <span class="review-card-stars">★★★★★</span>
-        <span class="review-card-date">1 month ago</span>
-      </div>
-      <p class="review-card-text">Such a welcoming space. Hikaru took the time to understand my lifestyle and daily routine before even touching my hair. The Koenji vibe makes it even better.</p>
-    </div>
-  </div>
-  <a href="https://g.page/r/CT7_5B4h1H3FEBM/review" target="_blank" rel="noopener" class="review-all-link">View all on Google →</a>
-</div>
-<div class="review-overlay" id="review-overlay" onclick="toggleReviews()"></div>
+</a>
 
 
 <!-- ═══════════════════════════════════════════
@@ -2088,13 +2103,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="hero-overlay">
     <h1 class="hero-h1">
       <span class="hero-copy lang-en" lang="en">A salon for the hair<br>you actually live in.</span>
-      <span style="display:none;" class="hero-copy lang-jp" lang="ja">髪型を選ぶのではなく、<br>自分の髪を見つける。</span>
+      <span class="hero-copy lang-jp" lang="ja">髪型を選ぶのではなく、<br>自分の髪を見つける。</span>
     </h1>
+    <h2 class="hero-keyword-h2 lang-en">English-speaking hair salon · Koenji · 7 min from Shinjuku · Appointment only</h2>
+    <h2 class="hero-keyword-h2 lang-jp">高円寺の英語対応プライベート美容室 · 新宿から7分 · 完全予約制</h2>
     <p class="hero-sub lang-en">Private hair salon in Koenji, Tokyo · English OK · Appointment only</p>
-    <p style="display:none;" class="hero-sub lang-jp">高円寺・完全予約制・英語対応</p>
+    <p class="hero-sub lang-jp">高円寺・完全予約制・英語対応</p>
     <div class="hero-cta">
       <a href="#booking" class="hero-book-btn lang-en">BOOK NOW</a>
-      <a href="#booking" style="display:none;" class="hero-book-btn lang-jp">予約する</a>
+      <a href="#booking" class="hero-book-btn lang-jp">予約する</a>
     </div>
     <p class="hero-scroll">↓ SCROLL</p>
     <p class="hero-meta"><span>Koenji</span><span class="dot">·</span><span>Tokyo</span><span class="dot">·</span><span>By appointment</span></p>
@@ -2113,7 +2130,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="concept-frag">So tomorrow, your style feels a little more like yours.</span>
   </div>
 
-  <div style="display:none;" class="concept-jp lang-jp fade-only">
+  <div class="concept-jp lang-jp fade-only">
     <span class="concept-frag">何気なく聴いている音楽。</span>
     <span class="concept-frag">昨日あった小さな出来事。</span>
     <br>
@@ -2126,7 +2143,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="ba-header">
       <span class="ba-label">Style Archive</span>
       <span class="ba-scroll-hint lang-en">Swipe →</span>
-      <span style="display:none;" class="ba-scroll-hint lang-jp">スワイプ →</span>
+      <span class="ba-scroll-hint lang-jp">スワイプ →</span>
     </div>
     <div class="ba-track">
       <div class="ba-card">
@@ -2249,7 +2266,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <p class="profile-bio lang-en">Clients who met through me and ended up married. A kid who first sat in my chair in elementary school and came back for their coming-of-age ceremony. This work isn't about making hair neat — it's about being part of someone's life as a steady, quiet presence. That's what keeps me here.</p>
 
-      <p style="display:none;" class="profile-bio lang-jp">自分を介してお客さん同士が出会い、家族になったり。小学生だった子が成人して、また髪を任せてくれたり。髪を切ることを通して、その人の暮らしの地続きに当たり前のように居られること。それがこの仕事を好きで続けている理由です。</p>
+      <p class="profile-bio lang-jp">自分を介してお客さん同士が出会い、家族になったり。小学生だった子が成人して、また髪を任せてくれたり。髪を切ることを通して、その人の暮らしの地続きに当たり前のように居られること。それがこの仕事を好きで続けている理由です。</p>
 
       <!-- Credential facts — EN -->
       <div class="fact-divider"></div>
@@ -2268,7 +2285,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <!-- Credential facts — JP -->
       <div class="fact-divider"></div>
       <div class="fact-divider" style="margin: 24px 0;"></div>
-      <div style="display:none;" class="profile-facts lang-jp">
+      <div class="profile-facts lang-jp">
         <div class="fact-item"><span class="fact-num">15+</span><span class="fact-label">年以上の美容師キャリア</span></div>
         <div class="fact-item"><span class="fact-num">40+</span><span class="fact-label">カ国以上のクライアント対応実績</span></div>
         <div class="fact-item"><span class="fact-num">1,000+</span><span class="fact-label">名以上 / 年間施術数</span></div>
@@ -2279,7 +2296,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
 
       <p class="profile-tags lang-en">Curly · Wavy · Straight · Colour · Bleach · Highlight · Balayage · International clients</p>
-      <p style="display:none;" class="profile-tags lang-jp">くせ毛 · ウェーブ · ストレート · カラー · ブリーチ · ハイライト · バレイヤージュ · 外国人対応</p>
+      <p class="profile-tags lang-jp">くせ毛 · ウェーブ · ストレート · カラー · ブリーチ · ハイライト · バレイヤージュ · 外国人対応</p>
       </div><!-- /section-content-delayed -->
     </div>
   </div>
@@ -2298,15 +2315,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="voice-text">"Hikaru took the time to understand my lifestyle before even touching my hair."</p>
       <p class="voice-attr">— Lena R. · ★★★★★</p>
     </div>
-    <div style="display:none;" class="voice-card lang-jp">
+    <div class="voice-card lang-jp">
       <p class="voice-text">"東京で初めて、自分の髪を理解してもらえたと感じました。"</p>
       <p class="voice-attr">— Sarah M. · ★★★★★</p>
     </div>
-    <div style="display:none;" class="voice-card lang-jp">
+    <div class="voice-card lang-jp">
       <p class="voice-text">"カウンセリングが丁寧で、自分でも気づいていなかったスタイルに出会えました。"</p>
       <p class="voice-attr">— Thomas K. · ★★★★★</p>
     </div>
-    <div style="display:none;" class="voice-card lang-jp">
+    <div class="voice-card lang-jp">
       <p class="voice-text">"髪に触れる前に、ライフスタイルを理解しようとしてくれる美容師さんです。"</p>
       <p class="voice-attr">— Lena R. · ★★★★★</p>
     </div>
@@ -2322,9 +2339,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="mc-inner">
     <p class="mc-label">Mood Curator</p>
     <h2 class="mc-hl lang-en">Not sure what you need?</h2>
-    <h2 style="display:none;" class="mc-hl lang-jp">メニューに迷ったら？</h2>
+    <h2 class="mc-hl lang-jp">メニューに迷ったら？</h2>
     <p class="mc-desc lang-en">Your mood, instincts, and style — turned into a direction in 3 minutes.</p>
-    <p style="display:none;" class="mc-desc lang-jp">着ているもの、日々の気分、直感から、<br class="br-mobile">スタイルの方向性を見つける診断。</p>
+    <p class="mc-desc lang-jp">着ているもの、日々の気分、直感から、<br class="br-mobile">スタイルの方向性を見つける診断。</p>
 
     <div class="mc-preview" id="mc-cards">
       <div class="mc-card" style="transition-delay:0.1s">
@@ -2364,7 +2381,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <a href="https://find.hairisyoursignature.jp/" target="_blank" rel="noopener" class="mc-btn lang-en" id="mc-btn">START DIAGNOSIS</a>
-    <a href="https://find.hairisyoursignature.jp/" target="_blank" rel="noopener" style="display:none;" class="mc-btn lang-jp" id="mc-btn-jp">診断してみる</a>
+    <a href="https://find.hairisyoursignature.jp/" target="_blank" rel="noopener" class="mc-btn lang-jp" id="mc-btn-jp">診断してみる</a>
   </div>
 </section>
 
@@ -2420,7 +2437,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 
   <!-- JP Menu -->
-  <div style="display:none;" class="lang-jp">
+  <div class="lang-jp">
     <div class="menu-item">
       <span class="menu-num">01</span>
       <div class="menu-name">カット<div class="menu-desc">シャンプー＆ブロー込み。</div></div>
@@ -2465,6 +2482,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 
+<!-- ═══════════════════════════════════════════
+     MEN'S / BARBER-STYLE
+     ═══════════════════════════════════════════ -->
+<section class="section section-border fade-in" id="mens" aria-label="Men's haircut and barber-style services in English, Tokyo">
+  <h2 class="section-label">For Men · Barber-Style Cuts</h2>
+
+  <div class="lang-en mens-wrap">
+    <p class="mens-lead">Precision fade haircuts and scissor work in an English-speaking environment. Whether you want a low/mid/high fade, a textured crop, or a grown-out style cut to age well — barber-trained scissor work without the chain-shop rush.</p>
+    <ul class="mens-list">
+      <li><strong>Fade haircut</strong> — low / mid / high fade, skin fade, taper</li>
+      <li><strong>Textured crop</strong> — French crop, modern quiff, messy crop</li>
+      <li><strong>Scissor cut</strong> — classic, layered, grown-out men's styles</li>
+      <li><strong>Men's color</strong> — single tone, gray blending, subtle highlights</li>
+    </ul>
+    <p class="mens-meta">Common bookings: men relocating from London, Berlin, NY who can't find their fade in Tokyo · Japanese clients who want barber-style cuts with English consultation.</p>
+    <p class="mens-price"><strong>All men's haircuts: ¥6,600</strong> (includes shampoo &amp; blow). Color services: see <a href="#service">menu</a>.</p>
+  </div>
+
+  <div class="lang-jp mens-wrap">
+    <p class="mens-lead">フェードカット、テクスチャードクロップ、メンズはさみカット、メンズカラーまで。バーバートレーニングを受けた繊細なはさみワークを、チェーン店のような流れ作業ではなく一人ずつ丁寧に。</p>
+    <ul class="mens-list">
+      <li><strong>フェードカット</strong> — ロー / ミッド / ハイ / スキンフェード / テーパー</li>
+      <li><strong>テクスチャードクロップ</strong> — フレンチクロップ / モダンクイフ / メッシークロップ</li>
+      <li><strong>はさみカット</strong> — クラシック / レイヤード / 伸ばしかけスタイル</li>
+      <li><strong>メンズカラー</strong> — シングルカラー / 白髪ぼかし / さりげないハイライト</li>
+    </ul>
+    <p class="mens-meta">London・Berlin・NYからの移住者で「東京で自分のフェードに出会えない」という方や、英語で相談しながらバーバースタイルにしたい日本人客に多くご利用いただいています。</p>
+    <p class="mens-price"><strong>メンズカット 全て ¥6,600</strong>（シャンプー＆ブロー込み）。カラー類は<a href="#service">メニュー</a>参照。</p>
+  </div>
+</section>
+
 
 <!-- ═══════════════════════════════════════════
      SALON / ACCESS
@@ -2479,7 +2527,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     Mirror A, 2F GRANDSTATUS Kurihara,<br>
     4-9-8 Koenjiminami, Suginami-ku, Tokyo<br><br>
     <span class="lang-en"><small style="color:var(--muted);">※ Booking via online only</small></span>
-    <span style="display:none;" class="lang-jp"><small style="color:var(--muted);">※ご予約はオンラインのみ</small></span>
+    <span class="lang-jp"><small style="color:var(--muted);">※ご予約はオンラインのみ</small></span>
   </p>
   <div class="salon-grid">
     <div class="salon-img-placeholder"><img src="assets/salon-interior.jpg" alt="Interior of HIKARU TERADA private hair salon — a quiet, warm-minimal one-on-one studio (Mirror A) in Koenji, Suginami, Tokyo. 3 minutes walk from Koenji Station." width="800" height="600" loading="lazy" decoding="async"></div>
@@ -2488,7 +2536,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="salon-note lang-en">
     A private studio within R_UNDER — all bookings and inquiries directly below.
   </div>
-  <div style="display:none;" class="salon-note lang-jp">
+  <div class="salon-note lang-jp">
     R_UNDER内のプライベートスタジオです。ご予約・お問い合わせは下記フォームより直接お願いいたします。
   </div>
   <div class="map-placeholder">
@@ -2501,9 +2549,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
   <div class="map-meta">
     <span class="lang-en">3 min walk · JR Koenji South Exit</span>
-    <span style="display:none;" class="lang-jp">JR高円寺駅南口 徒歩3分</span>
+    <span class="lang-jp">JR高円寺駅南口 徒歩3分</span>
     <a href="https://www.google.com/maps/search/?api=1&query=35.703281,139.651021" target="_blank" rel="noopener" class="map-meta-link lang-en">Open in Google Maps →</a>
-    <a href="https://www.google.com/maps/search/?api=1&query=35.703281,139.651021" target="_blank" rel="noopener" style="display:none;" class="map-meta-link lang-jp">Google Mapsで開く →</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=35.703281,139.651021" target="_blank" rel="noopener" class="map-meta-link lang-jp">Google Mapsで開く →</a>
   </div>
 </section>
 
@@ -2513,7 +2561,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      ═══════════════════════════════════════════ -->
 <section class="section section-border fade-in" id="sticker">
   <h2 class="section-label label-reveal lang-en" style="visibility:hidden">Sticker</h2>
-  <h2 class="section-label label-reveal lang-jp" style="visibility:hidden;display:none">Sticker</h2>
+  <h2 class="section-label label-reveal lang-jp" style="visibility:hidden">Sticker</h2>
   <div class="sticker-section">
     <video class="sticker-video" autoplay loop muted playsinline>
       <source src="assets/HAIR_ICONS_STICKER.mp4" type="video/mp4">
@@ -2526,7 +2574,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div>
       <p class="sticker-copy lang-en">Every guest receives a complimentary #hairisyoursignature sticker. Each one features a hand-drawn character with a unique hairstyle — the design changes every time. A small reminder that your hair is part of your identity.</p>
-      <p style="display:none;" class="sticker-copy lang-jp">ご来店いただいたすべてのお客様に、#hairisyoursignature ステッカーをお渡ししています。毎回異なる手描きキャラクターとヘアスタイルが描かれた一点もの。あなたの髪が、あなたのアイデンティティの一部であることを思い出す小さなきっかけに。</p>
+      <p class="sticker-copy lang-jp">ご来店いただいたすべてのお客様に、#hairisyoursignature ステッカーをお渡ししています。毎回異なる手描きキャラクターとヘアスタイルが描かれた一点もの。あなたの髪が、あなたのアイデンティティの一部であることを思い出す小さなきっかけに。</p>
     </div>
   </div>
 </section>
@@ -2538,7 +2586,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section class="section section-border fade-in" id="faq">
   <h2 class="section-label label-reveal lang-en">FAQ</h2>
   <!-- SEO: handled by FAQPage schema -->
-  <h2 style="display:none;" class="section-label label-reveal lang-jp">よくある質問</h2>
+  <h2 class="section-label label-reveal lang-jp">よくある質問</h2>
 
   <div class="lang-en">
     <div class="faq-tabs">
@@ -2595,7 +2643,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 
-  <div style="display:none;" class="lang-jp">
+  <div class="lang-jp">
     <div class="faq-tabs">
       <button class="faq-tab active" onclick="switchFaqTab(this, 'jp-previsit')">来店前</button>
       <button class="faq-tab" onclick="switchFaqTab(this, 'jp-hair')">施術・メニュー</button>
@@ -2643,13 +2691,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      ═══════════════════════════════════════════ -->
 <section class="booking fade-in" id="booking">
   <h2 class="booking-hl lang-en">Ready when you are.</h2>
-  <h2 style="display:none;" class="booking-hl lang-jp">Ready when you are.</h2>
+  <h2 class="booking-hl lang-jp">Ready when you are.</h2>
   <p class="booking-sub lang-en">English-speaking stylist. One-on-one, no rush.<br>Free consultation available via <a href="https://www.instagram.com/hairisyoursignature/" target="_blank" rel="noopener" style="color:var(--text);text-decoration:underline;">Instagram DM</a>.</p>
-  <p style="display:none;" class="booking-sub lang-jp">事前相談は<a href="https://www.instagram.com/zonamb/" target="_blank" rel="noopener" style="color:var(--text);text-decoration:underline;">Instagram DM</a>で無料で受け付けています。</p>
+  <p class="booking-sub lang-jp">事前相談は<a href="https://www.instagram.com/zonamb/" target="_blank" rel="noopener" style="color:var(--text);text-decoration:underline;">Instagram DM</a>で無料で受け付けています。</p>
   <div class="booking-buttons lang-en">
     <a href="https://zonamb11111-bit.github.io/kommons-booking/" target="_blank" rel="noopener" class="book-btn book-btn-primary">BOOK NOW</a>
   </div>
-  <div style="display:none;" class="booking-buttons lang-jp">
+  <div class="booking-buttons lang-jp">
     <a href="https://zonamb11111-bit.github.io/kommons-booking/" target="_blank" rel="noopener" class="book-btn book-btn-primary">予約する</a>
   </div>
 </section>
@@ -2662,7 +2710,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="footer-tagline">Koenji, Tokyo</span>
     <div class="footer-links">
       <a href="https://www.instagram.com/hairisyoursignature/" target="_blank" rel="noopener" class="lang-en">Instagram</a>
-      <a href="https://www.instagram.com/zonamb/" target="_blank" rel="noopener" style="display:none;" class="lang-jp">Instagram</a>
+      <a href="https://www.instagram.com/zonamb/" target="_blank" rel="noopener" class="lang-jp">Instagram</a>
       <a href="https://www.tiktok.com/@hikaruterada" target="_blank" rel="noopener">TikTok</a>
       <a href="https://g.page/r/CT7_5B4h1H3FEBM/review" target="_blank" rel="noopener">Google Reviews</a>
       <a href="https://find.hairisyoursignature.jp/" target="_blank" rel="noopener">Mood Curator</a>
@@ -2758,22 +2806,16 @@ function toggleFaq(btn) {
   if (!wasOpen) item.classList.add('open');
 }
 
-/* ── Review panel ── */
-function toggleReviews() {
-  const panel = document.getElementById('review-panel');
-  const overlay = document.getElementById('review-overlay');
-  const isOpen = panel.classList.contains('open');
-  panel.classList.toggle('open');
-  overlay.classList.toggle('open');
-  if (!isOpen) {
-    document.body.style.overflow = '';
-  }
-}
-
 /* ── Language toggle — full switch ── */
 let currentLang = 'en';
 function setLang(lang) {
   currentLang = lang;
+  // Sync html class for FOUC-free CSS visibility control
+  document.documentElement.classList.remove('lang-en', 'lang-jp');
+  document.documentElement.classList.add('lang-' + lang);
+  document.documentElement.lang = lang === 'jp' ? 'ja' : 'en';
+  // Persist user choice
+  try { localStorage.setItem('lang', lang); } catch(e) {}
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
   document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
 
@@ -2835,28 +2877,49 @@ function setLang(lang) {
 }
 
 /* ── B&A video: lazy load + play on hover/tap ── */
-const baObserver = new IntersectionObserver((entries) => {
+/* ── Style Archive: lazy-load nearby + autoplay only the centered card ── */
+// Lazy-load videos when they get close to the viewport (cheap setup)
+const baLoadObserver = new IntersectionObserver((entries) => {
   entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const video = e.target.querySelector('.ba-video');
+    if (!video) return;
+    const source = video.querySelector('source[data-src]');
+    if (source && !source.src) {
+      source.src = source.dataset.src;
+      video.load();
+    }
+    baLoadObserver.unobserve(e.target);
+  });
+}, { rootMargin: '300px' });
+
+// Autoplay only the card whose center sits in the viewport's center band
+// rootMargin -40% L/R means only the central 20% of the viewport is the active zone
+const baPlayObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    const video = e.target.querySelector('.ba-video');
+    if (!video) return;
     if (e.isIntersecting) {
-      const video = e.target.querySelector('.ba-video');
-      if (!video) return;
       const source = video.querySelector('source[data-src]');
       if (source && !source.src) {
         source.src = source.dataset.src;
         video.load();
       }
-      baObserver.unobserve(e.target);
+      video.play().catch(() => {});
+    } else {
+      video.pause();
     }
   });
-}, { rootMargin: '200px' });
+}, { rootMargin: '0px -40% 0px -40%' });
 
 document.querySelectorAll('.ba-card').forEach(card => {
-  baObserver.observe(card);
-  
+  baLoadObserver.observe(card);
+  baPlayObserver.observe(card);
+
   const video = card.querySelector('.ba-video');
   if (!video) return;
-  
-  // Desktop: hover to play
+
+  // Desktop: hover keeps it playing (centered card is already playing; this allows playing non-centered too)
   card.addEventListener('mouseenter', () => {
     const source = video.querySelector('source');
     if (source && !source.src && source.dataset.src) {
@@ -2865,30 +2928,27 @@ document.querySelectorAll('.ba-card').forEach(card => {
     }
     video.play().catch(() => {});
   });
-  card.addEventListener('mouseleave', () => {
-    video.pause();
-    video.currentTime = 0;
-  });
-  
-  // Mobile: tap to toggle
+  // No mouseleave pause — let baPlayObserver govern when the user moves on
+
+  // Mobile: tap to pause/resume the visible card
   card.addEventListener('click', (e) => {
     if (window.innerWidth > 768) return;
     e.preventDefault();
-    const source = video.querySelector('source');
-    if (source && !source.src && source.dataset.src) {
-      source.src = source.dataset.src;
-      video.load();
-    }
     if (video.paused) {
-      document.querySelectorAll('.ba-video').forEach(v => { v.pause(); v.currentTime = 0; });
       video.play().catch(() => {});
       card.classList.add('playing');
     } else {
       video.pause();
-      video.currentTime = 0;
       card.classList.remove('playing');
     }
   });
+});
+
+// Pause all when tab is hidden (battery / CPU)
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    document.querySelectorAll('.ba-video').forEach(v => v.pause());
+  }
 });
 
 /* ── Parallax: subtle depth on scroll ── */
@@ -2920,8 +2980,8 @@ function detectLang() {
 
 /* ── Hero text reveal on load ── */
 window.addEventListener('load', () => {
-  // Set language based on browser before any animation
-  const detectedLang = detectLang();
+  // Sync setLang with html class set by early head script
+  const detectedLang = document.documentElement.classList.contains('lang-jp') ? 'jp' : 'en';
   setLang(detectedLang);
 
   // Animate whichever hero copy is currently visible
