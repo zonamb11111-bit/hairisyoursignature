@@ -1346,7 +1346,10 @@ html.lang-jp .hero-keyword-h2 { font-family: var(--font-jp); letter-spacing: 0.0
 .menu-price {
   font-size: 13px; font-weight: var(--bw); color: var(--muted);
   white-space: nowrap; margin-left: 24px;
+  display: inline-flex; align-items: baseline; justify-content: flex-end;
 }
+.menu-price-num { font-variant-numeric: tabular-nums; text-align: right; }
+.menu-price-tilde { display: inline-block; width: 0.7em; text-align: left; flex-shrink: 0; }
 .menu-note {
   font-size: 11px; font-weight: var(--bw); color: var(--muted);
   margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border);
@@ -1559,6 +1562,11 @@ html.lang-jp .hero-keyword-h2 { font-family: var(--font-jp); letter-spacing: 0.0
 html.lang-en .lang-jp { display: none !important; }
 html.lang-jp .lang-en { display: none !important; }
 
+/* Mobile: each concept fragment on its own line */
+@media (max-width: 768px) {
+  .concept-en .concept-frag, .concept-jp .concept-frag { display: block; }
+}
+
 /* Men's / Barber section */
 .mens-wrap { max-width: 720px; margin: 0 auto; line-height: 1.85; }
 .mens-lead { font-size: 14px; color: var(--text); margin-bottom: 24px; }
@@ -1676,8 +1684,9 @@ html.lang-jp .mens-lead, html.lang-jp .mens-meta, html.lang-jp .mens-list li, ht
 
   /* Profile / Salon / Sticker — uniform 36px grid gap, unified content max-widths */
   .profile-grid { grid-template-columns: 1fr; gap: 36px; place-items: center; }
-  .profile-grid > * { width: 100%; max-width: 220px; }
-  .profile-img-placeholder { max-width: 180px; }
+  .profile-grid > * { width: 100%; }
+  .profile-img-placeholder { max-width: 180px; margin: 0 auto; }
+  .profile-bio, .profile-bio-en, .profile-tags, .profile-facts { max-width: 360px; margin-left: auto; margin-right: auto; }
   .profile-name { font-size: 13.5px; }
   .profile-role { font-size: 10px; margin-bottom: 24px; }
   .profile-bio { font-size: 11.5px; line-height: 2; }
@@ -1706,8 +1715,9 @@ html.lang-jp .mens-lead, html.lang-jp .mens-meta, html.lang-jp .mens-list li, ht
   }
 
   .sticker-section { grid-template-columns: 1fr; gap: 36px; place-items: center; }
-  .sticker-section > * { width: 100%; max-width: 240px; }
-  .sticker-img-placeholder, .sticker-video, .sticker-poster { max-width: 220px; }
+  .sticker-section > * { width: 100%; }
+  .sticker-img-placeholder, .sticker-video, .sticker-poster { max-width: 220px; margin: 0 auto; }
+  .sticker-copy { max-width: 360px; margin: 0 auto; }
 
   /* Service menu — 3-col grid for uniform price alignment */
   .menu-item {
@@ -1720,7 +1730,7 @@ html.lang-jp .mens-lead, html.lang-jp .mens-meta, html.lang-jp .mens-list li, ht
   .menu-num { font-size: 9px; min-width: 0; margin-right: 0; }
   .menu-name { font-size: 12.5px; }
   .menu-desc { font-size: 10.5px; }
-  .menu-price { font-size: 11px; margin-left: 0; text-align: right; font-variant-numeric: tabular-nums; }
+  .menu-price { font-size: 11px; margin-left: 0; justify-content: flex-end; }
   .menu-note { font-size: 9.5px; margin-top: 28px; padding-top: 20px; }
 
   /* Mood Curator — unified 96px padding */
@@ -2134,7 +2144,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="concept-jp lang-jp fade-only">
     <span class="concept-frag">やりたいスタイルが明確な方も、相談しながら決めたい方も。</span>
-    <span class="concept-frag">あなただけのスタイルを、一緒につくります。</span>
+    <span class="concept-frag">あなただけのスタイルを一緒につくります。</span>
     <span class="concept-frag">自分らしさを心地よく感じられる仕上がりに。</span>
   </div>
 
@@ -2267,7 +2277,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <p class="profile-bio lang-en">Hello, my name is Hikaru. With over 15 years of experience as a stylist in Tokyo, I focus on helping clients feel confident in how they express their personal style through their hair.<br><br>Over the years, I've had the privilege of being part of many meaningful moments — from giving a child their first haircut to styling them for their high school graduation, to styling someone for their big proposal. These real experiences are what make my work so special to me.</p>
 
-      <p class="profile-bio lang-jp">はじめまして、寺田光です。東京で15年以上美容師をしています。ヘアスタイルを通して、お客様が自分らしさに自信を持てるよう、お一人おひとりに向き合っています。<br><br>これまで、お子さまの初めてのカットから、高校の卒業式、人生の大切なプロポーズの日のスタイリングまで、たくさんの大切な瞬間に立ち会わせていただきました。こうした実体験こそが、私にとってこの仕事を特別なものにしてくれています。</p>
+      <p class="profile-bio lang-jp">はじめまして。寺田光です。ご近所から海外の方まで、ボーダレスにたくさんの方のヘアスタイルに携わってきました。ヘアスタイルを変えることで、何か日々の生活のテンションが上がるようなご提案をしていければと思っております。</p>
 
       <!-- Credential facts — EN -->
       <div class="fact-divider"></div>
@@ -2398,37 +2408,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="menu-item">
       <span class="menu-num">01</span>
       <div class="menu-name">Cut<div class="menu-desc">Includes shampoo & blow.</div></div>
-      <span class="menu-price">¥6,600</span>
+      <span class="menu-price"><span class="menu-price-num">¥6,600</span><span class="menu-price-tilde"></span></span>
     </div>
     <div class="menu-item">
       <span class="menu-num">02</span>
       <div class="menu-name">Single Process Colour<div class="menu-desc">Full colour tailored to your skin tone and lifestyle.</div></div>
-      <span class="menu-price">¥8,800〜</span>
+      <span class="menu-price"><span class="menu-price-num">¥8,800</span><span class="menu-price-tilde">〜</span></span>
     </div>
     <div class="menu-item">
       <span class="menu-num">03</span>
       <div class="menu-name">Double Process Colour<div class="menu-desc">Bleach + toner for high-lift or vivid tones.</div></div>
-      <span class="menu-price">¥20,900〜</span>
+      <span class="menu-price"><span class="menu-price-num">¥20,900</span><span class="menu-price-tilde">〜</span></span>
     </div>
     <div class="menu-item">
       <span class="menu-num">04</span>
       <div class="menu-name">Perm<div class="menu-desc">Adding movement, or calming it down.</div></div>
-      <span class="menu-price">¥8,800〜</span>
+      <span class="menu-price"><span class="menu-price-num">¥8,800</span><span class="menu-price-tilde">〜</span></span>
     </div>
     <div class="menu-item">
       <span class="menu-num">05</span>
       <div class="menu-name">Treatment (KERAFFECT)<div class="menu-desc">Keratin repair for strength and shine.</div></div>
-      <span class="menu-price">¥4,400〜</span>
+      <span class="menu-price"><span class="menu-price-num">¥4,400</span><span class="menu-price-tilde">〜</span></span>
     </div>
     <div class="menu-item">
       <span class="menu-num">06</span>
       <div class="menu-name">Head Spa<div class="menu-desc">Scalp care and deep relaxation.</div></div>
-      <span class="menu-price">¥4,400〜</span>
+      <span class="menu-price"><span class="menu-price-num">¥4,400</span><span class="menu-price-tilde">〜</span></span>
     </div>
     <div class="menu-item">
       <span class="menu-num">07</span>
       <div class="menu-name">Shampoo & Blow<div class="menu-desc">Standalone shampoo and blow-dry.</div></div>
-      <span class="menu-price">¥4,400</span>
+      <span class="menu-price"><span class="menu-price-num">¥4,400</span><span class="menu-price-tilde"></span></span>
     </div>
     <p class="menu-note">※ Shampoo & blow charge applies separately for all services except cut.</p>
     <div class="menu-links">
@@ -2442,37 +2452,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="menu-item">
       <span class="menu-num">01</span>
       <div class="menu-name">カット<div class="menu-desc">シャンプー＆ブロー込み。</div></div>
-      <span class="menu-price">¥6,600</span>
+      <span class="menu-price"><span class="menu-price-num">¥6,600</span><span class="menu-price-tilde"></span></span>
     </div>
     <div class="menu-item">
       <span class="menu-num">02</span>
       <div class="menu-name">カラー（シングル）<div class="menu-desc">肌色とライフスタイルに合わせたフルカラー。</div></div>
-      <span class="menu-price">¥7,700〜</span>
+      <span class="menu-price"><span class="menu-price-num">¥7,700</span><span class="menu-price-tilde">〜</span></span>
     </div>
     <div class="menu-item">
       <span class="menu-num">03</span>
       <div class="menu-name">ダブルカラー<div class="menu-desc">ブリーチ＋トナーで透明感のある色味へ。</div></div>
-      <span class="menu-price">¥16,500〜</span>
+      <span class="menu-price"><span class="menu-price-num">¥16,500</span><span class="menu-price-tilde">〜</span></span>
     </div>
     <div class="menu-item">
       <span class="menu-num">04</span>
       <div class="menu-name">パーマ<div class="menu-desc">動きを足す、あるいは抑える。</div></div>
-      <span class="menu-price">¥7,700〜</span>
+      <span class="menu-price"><span class="menu-price-num">¥7,700</span><span class="menu-price-tilde">〜</span></span>
     </div>
     <div class="menu-item">
       <span class="menu-num">05</span>
       <div class="menu-name">髪質改善トリートメント<div class="menu-desc">内部から補修し、扱いやすい髪へ。</div></div>
-      <span class="menu-price">¥9,900〜</span>
+      <span class="menu-price"><span class="menu-price-num">¥9,900</span><span class="menu-price-tilde">〜</span></span>
     </div>
     <div class="menu-item">
       <span class="menu-num">06</span>
       <div class="menu-name">ヘッドスパ<div class="menu-desc">頭皮ケアとリラクゼーション。</div></div>
-      <span class="menu-price">¥2,200〜</span>
+      <span class="menu-price"><span class="menu-price-num">¥2,200</span><span class="menu-price-tilde">〜</span></span>
     </div>
     <div class="menu-item">
       <span class="menu-num">07</span>
       <div class="menu-name">シャンプー＆ブロー<div class="menu-desc">シャンプーとブローのみ。</div></div>
-      <span class="menu-price">¥2,750</span>
+      <span class="menu-price"><span class="menu-price-num">¥2,750</span><span class="menu-price-tilde"></span></span>
     </div>
     <p class="menu-note">※ カット以外のメニューを単品でご利用の場合、シャンプーブロー代が別途かかります。</p>
     <div class="menu-links">
@@ -2487,7 +2497,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      MEN'S / BARBER-STYLE
      ═══════════════════════════════════════════ -->
 <section class="section section-border fade-in" id="mens" aria-label="Men's haircut and barber-style services in English, Tokyo">
-  <h2 class="section-label">For Men · Barber-Style Cuts</h2>
+  <h2 class="section-label">💈 For Men · Barber-Style Cuts</h2>
 
   <div class="lang-en mens-wrap">
     <p class="mens-lead">Precision fade haircuts and scissor work in an English-speaking environment. Whether you want a low/mid/high fade, a textured crop, or a grown-out style cut to age well — barber-trained scissor work without the chain-shop rush.</p>
