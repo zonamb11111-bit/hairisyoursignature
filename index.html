@@ -1,12 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-PL8XGR2P');</script>
+<!-- Google Tag Manager — deferred load to improve LCP/TBT -->
+<script>
+// Init dataLayer immediately so any code can push events while GTM loads
+window.dataLayer = window.dataLayer || [];
+window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+
+// Defer the actual GTM script fetch until after page load + browser idle
+(function() {
+  function loadGTM() {
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-PL8XGR2P';
+    document.head.appendChild(s);
+  }
+  if (document.readyState === 'complete') {
+    setTimeout(loadGTM, 50);
+  } else {
+    window.addEventListener('load', function() {
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadGTM, { timeout: 2000 });
+      } else {
+        setTimeout(loadGTM, 1500);
+      }
+    });
+  }
+})();
+</script>
 <!-- End Google Tag Manager -->
 
 <!-- Early language detection — prevents FOUC -->
@@ -422,6 +443,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<link rel="preload" as="image" href="assets/hero-poster.jpg" fetchpriority="high">
 
 <!-- FAQ Schema — Japanese (for AIO/SGE in Japanese search) -->
 <script type="application/ld+json">
@@ -2051,8 +2074,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      ═══════════════════════════════════════════ -->
 <section class="hero section-wide" aria-label="HIKARU TERADA — hero introduction">
   <div class="hero-video-wrap">
-    <video class="hero-video" autoplay loop muted playsinline preload="metadata" poster="assets/hero-poster.jpg">
-      <source src="assets/hero.mp4" type="video/mp4">
+    <video class="hero-video" loop muted playsinline preload="none" poster="assets/hero-poster.jpg">
+      <source data-src="assets/hero.mp4" type="video/mp4">
     </video>
     <div class="hero-video-placeholder" style="display:none;">VIDEO — salon atmosphere</div>
   </div>
@@ -2905,9 +2928,36 @@ document.querySelectorAll('.ba-card').forEach(card => {
 // Pause all when tab is hidden (battery / CPU)
 document.addEventListener('visibilitychange', () => {
   if (document.hidden) {
-    document.querySelectorAll('.ba-video, .sticker-video').forEach(v => v.pause());
+    document.querySelectorAll('.hero-video, .ba-video, .sticker-video').forEach(v => v.pause());
   }
 });
+
+// Lazy-load the hero video AFTER initial paint — keeps the LCP element as the
+// poster image (small JPG) instead of the video frame, dramatically improving LCP.
+(function() {
+  const heroVideo = document.querySelector('.hero-video');
+  if (!heroVideo) return;
+  function startHeroVideo() {
+    const source = heroVideo.querySelector('source[data-src]');
+    if (source && !source.src) {
+      source.src = source.dataset.src;
+      heroVideo.load();
+    }
+    heroVideo.play().catch(() => {});
+  }
+  function schedule() {
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(startHeroVideo, { timeout: 1500 });
+    } else {
+      setTimeout(startHeroVideo, 600);
+    }
+  }
+  if (document.readyState === 'complete') {
+    schedule();
+  } else {
+    window.addEventListener('load', schedule);
+  }
+})();
 
 // Lazy-load + autoplay the sticker video when its section enters the viewport
 (function() {
