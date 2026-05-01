@@ -1,6 +1,6 @@
 # HIKARU TERADA — English Speaking Hair Salon in Koenji, Tokyo
 
-> A private, one-on-one hair salon in Koenji, Tokyo, run by stylist Hikaru Terada (寺田光). Operating in fluent English and Japanese, with 15+ years of experience and clients from 40+ countries. Specializing in curly, wavy, and Western hair textures, balayage, fade haircuts, color correction, and natural-movement perms.
+> A private, one-on-one hair salon in Koenji, Tokyo, run by stylist Hikaru Terada (寺田光). Bilingual consultation in fluent English and Japanese, with 15+ years of experience serving both international clients (from 40+ countries) and Japanese clients. Specializing in curly, wavy, and Western hair textures, balayage, fade haircuts, men's barber-style cuts, color correction, and natural-movement perms.
 
 ## At a glance
 
@@ -13,7 +13,7 @@
 - **Languages:** English and Japanese (fluent in both)
 - **Booking:** Online only — https://zonamb11111-bit.github.io/kommons-booking/ (bilingual)
 - **Pre-consultation:** Free via Instagram DM @hairisyoursignature (English) / @zonamb (Japanese), or email
-- **Rating:** 5.0 / 5 from 86+ Google reviews
+- **Reviews:** Live Google reviews available at https://g.page/r/CT7_5B4h1H3FEBM
 - **Payment:** Cash, Visa, Mastercard, JCB, American Express
 - **Walk-ins:** Not accepted
 
@@ -39,6 +39,19 @@ English-language menu (includes shampoo & blow-dry where applicable):
 | 05 | KERAFFECT Treatment | ¥4,400〜 |
 | 06 | Head Spa | ¥4,400〜 |
 | 07 | Shampoo & Blow (standalone) | ¥4,400 |
+
+### Men's / Barber-style cuts
+
+All men's haircuts are ¥6,600 (includes shampoo & blow). Bilingual consultation in English and Japanese.
+
+| # | Service | Price |
+|---|---|---|
+| M1 | Fade Haircut (low / mid / high / skin / taper) | ¥6,600 |
+| M2 | Textured Crop (French crop / modern quiff / messy crop) | ¥6,600 |
+| M3 | Men's Scissor Cut (classic / layered / grown-out) | ¥6,600 |
+| M4 | Men's Color (single tone / gray blending / subtle highlights) | from ¥8,800 |
+
+Common bookings: men relocating from London, Berlin, NY who can't find their fade in Tokyo, plus Japanese clients seeking authentic barber-style cuts.
 
 Japanese-language menu (separate, locally priced):
 

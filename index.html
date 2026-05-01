@@ -112,13 +112,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       ],
       "founder": { "@id": "https://www.hairisyoursignature.jp/#hikaru-terada" },
       "employee": { "@id": "https://www.hairisyoursignature.jp/#hikaru-terada" },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "5.0",
-        "reviewCount": "86",
-        "bestRating": "5",
-        "worstRating": "1"
-      },
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
         "name": "Hair Services",
@@ -735,56 +728,6 @@ a { color: inherit; text-decoration: none; }
 .review-score { font-weight: 600; color: var(--text); }
 .review-stars-sm { color: #FBBC05; font-size: 10px; letter-spacing: 1px; }
 .review-count { font-size: 10px; }
-
-/* ── REVIEW PANEL ── */
-.review-panel {
-  position: fixed; bottom: 0; left: 0; z-index: 200;
-  width: 380px; max-height: 80vh; background: var(--white);
-  border: 1px solid var(--border); border-radius: 8px 8px 0 0;
-  box-shadow: 0 -8px 40px rgba(0,0,0,0.1);
-  transform: translateY(100%); opacity: 0;
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s;
-  overflow-y: auto; display: flex; flex-direction: column;
-}
-.review-panel.open { transform: translateY(0); opacity: 1; }
-.review-panel-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 16px 20px; border-bottom: 1px solid var(--border);
-  font-size: 13px; font-weight: var(--lw);
-  position: sticky; top: 0; background: var(--white); z-index: 1;
-}
-.review-close {
-  background: none; border: none; font-size: 16px; color: var(--muted);
-  cursor: pointer; padding: 4px; transition: color 0.2s;
-}
-.review-close:hover { color: var(--text); }
-.review-summary {
-  padding: 20px; display: flex; align-items: baseline; gap: 8px;
-  border-bottom: 1px solid var(--border);
-}
-.review-big-score { font-size: 32px; font-weight: 600; color: var(--text); }
-.review-big-stars { color: #FBBC05; font-size: 16px; letter-spacing: 2px; }
-.review-big-count { font-size: 12px; color: var(--muted); }
-.review-list { padding: 0 20px; flex: 1; }
-.review-card { padding: 16px 0; border-bottom: 1px solid var(--border); }
-.review-card:last-child { border-bottom: none; }
-.review-card-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
-.review-card-name { font-size: 12px; font-weight: var(--lw); }
-.review-card-stars { color: #FBBC05; font-size: 10px; }
-.review-card-date { font-size: 10px; color: var(--muted); }
-.review-card-text { font-size: 13px; font-weight: var(--bw); line-height: 1.7; color: var(--text); }
-.review-all-link {
-  display: block; padding: 16px 20px; text-align: center;
-  font-size: 12px; font-weight: var(--nw); color: var(--muted);
-  border-top: 1px solid var(--border); transition: color 0.2s;
-  position: sticky; bottom: 0; background: var(--white);
-}
-.review-all-link:hover { color: var(--text); }
-.review-overlay {
-  position: fixed; inset: 0; z-index: 190; background: rgba(0,0,0,0.15);
-  opacity: 0; pointer-events: none; transition: opacity 0.3s;
-}
-.review-overlay.open { opacity: 1; pointer-events: auto; }
 
 /* ── ANIMATIONS — goyemon-inspired ── */
 
@@ -1768,7 +1711,6 @@ html.lang-jp .mens-lead, html.lang-jp .mens-meta, html.lang-jp .mens-list li, ht
   .ba-card { width: 170px; }
 
   .review-badge { bottom: 20px; left: 16px; font-size: 10px; padding: 6px 10px; }
-  .review-panel { width: 100%; border-radius: 12px 12px 0 0; }
   .footer-links { flex-wrap: wrap; justify-content: center; font-size: 11px; }
 }
 
@@ -1922,6 +1864,7 @@ body.t-sticker-poster .sticker-poster { display: flex !important; }
   align-items: center; justify-content: center;
   position: relative; cursor: pointer;
   border-radius: 2px;
+  border: 0; padding: 0; font: inherit; color: inherit;
 }
 .sticker-poster::before {
   content: ''; position: absolute; inset: 0;
@@ -2005,7 +1948,7 @@ body.t-sticker-poster .sticker-poster { display: flex !important; }
 
 /* ── Print styles ── */
 @media print {
-  .float-actions, .review-badge, .review-panel, .review-overlay,
+  .float-actions, .review-badge,
   .hero-cta, .hero-scroll, .nav, .footer-links, .mc-section { display: none !important; }
   .fade-in, .slide-left, .slide-right { opacity: 1 !important; transform: none !important; }
   body { padding: 20px; }
@@ -2080,11 +2023,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
     <span>Book</span>
   </a>
-  <a href="https://www.instagram.com/hairisyoursignature/" target="_blank" rel="noopener" class="float-btn float-social lang-en" title="Instagram">
+  <a href="https://www.instagram.com/hairisyoursignature/" target="_blank" rel="noopener" class="float-btn float-social lang-en" title="Instagram" aria-label="Instagram (English account: @hairisyoursignature)">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg>
     <span>Instagram</span>
   </a>
-  <a href="https://www.instagram.com/zonamb/" target="_blank" rel="noopener" class="float-btn float-social lang-jp" title="Instagram">
+  <a href="https://www.instagram.com/zonamb/" target="_blank" rel="noopener" class="float-btn float-social lang-jp" lang="ja" title="Instagram" aria-label="Instagram（日本語アカウント @zonamb）">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg>
     <span>Instagram</span>
   </a>
@@ -2119,12 +2062,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span class="hero-copy lang-jp" lang="ja">カタログから選ぶのではなく、<br>自分のスタイルを見つける。</span>
     </h1>
     <h2 class="hero-keyword-h2 lang-en">English-speaking hair salon · Koenji · Appointment only</h2>
-    <h2 class="hero-keyword-h2 lang-jp">高円寺の英語対応プライベート美容室 · 完全予約制</h2>
+    <h2 class="hero-keyword-h2 lang-jp" lang="ja">高円寺の英語対応プライベート美容室 · 完全予約制</h2>
     <p class="hero-sub lang-en">7-min train ride from Shinjuku</p>
-    <p class="hero-sub lang-jp">高円寺・完全予約制・英語対応</p>
+    <p class="hero-sub lang-jp" lang="ja">高円寺・完全予約制・英語対応</p>
     <div class="hero-cta">
       <a href="#booking" class="hero-book-btn lang-en">BOOK NOW</a>
-      <a href="#booking" class="hero-book-btn lang-jp">予約する</a>
+      <a href="#booking" class="hero-book-btn lang-jp" lang="ja">予約する</a>
     </div>
     <p class="hero-scroll">↓ SCROLL</p>
     <p class="hero-meta"><span>Koenji</span><span class="dot">·</span><span>Tokyo</span><span class="dot">·</span><span>By appointment</span></p>
@@ -2142,7 +2085,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="concept-frag">one you'll feel confident, comfortable, and uniquely you.</span>
   </div>
 
-  <div class="concept-jp lang-jp fade-only">
+  <div class="concept-jp lang-jp fade-only" lang="ja">
     <span class="concept-frag">やりたいスタイルが明確な方も、相談しながら決めたい方も。</span>
     <span class="concept-frag">あなただけのスタイルを一緒につくります。</span>
     <span class="concept-frag">自分らしさを心地よく感じられる仕上がりに。</span>
@@ -2154,7 +2097,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="ba-header">
       <span class="ba-label">Style Archive</span>
       <span class="ba-scroll-hint lang-en">Swipe →</span>
-      <span class="ba-scroll-hint lang-jp">スワイプ →</span>
+      <span class="ba-scroll-hint lang-jp" lang="ja">スワイプ →</span>
     </div>
     <div class="ba-track">
       <div class="ba-card">
@@ -2277,7 +2220,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <p class="profile-bio lang-en">Hello, my name is Hikaru. With over 15 years of experience as a stylist in Tokyo, I focus on helping clients feel confident in how they express their personal style through their hair.<br><br>Over the years, I've had the privilege of being part of many meaningful moments — from giving a child their first haircut to styling them for their high school graduation, to styling someone for their big proposal. These real experiences are what make my work so special to me.</p>
 
-      <p class="profile-bio lang-jp">はじめまして。寺田光です。ご近所から海外の方まで、ボーダレスにたくさんの方のヘアスタイルに携わってきました。ヘアスタイルを変えることで、何か日々の生活のテンションが上がるようなご提案をしていければと思っております。</p>
+      <p class="profile-bio lang-jp" lang="ja">はじめまして。寺田光です。ご近所から海外の方まで、ボーダレスにたくさんの方のヘアスタイルに携わってきました。ヘアスタイルを変えることで、何か日々の生活のテンションが上がるようなご提案をしていければと思っております。</p>
 
       <!-- Credential facts — EN -->
       <div class="fact-divider"></div>
@@ -2296,7 +2239,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <!-- Credential facts — JP -->
       <div class="fact-divider"></div>
       <div class="fact-divider" style="margin: 24px 0;"></div>
-      <div class="profile-facts lang-jp">
+      <div class="profile-facts lang-jp" lang="ja">
         <div class="fact-item"><span class="fact-num">15+</span><span class="fact-label">年以上の美容師キャリア</span></div>
         <div class="fact-item"><span class="fact-num">40+</span><span class="fact-label">カ国以上のクライアント対応実績</span></div>
         <div class="fact-item"><span class="fact-num">1,000+</span><span class="fact-label">名以上 / 年間施術数</span></div>
@@ -2307,7 +2250,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
 
       <p class="profile-tags lang-en">Curly · Wavy · Straight · Colour · Bleach · Highlight · Balayage · International clients</p>
-      <p class="profile-tags lang-jp">くせ毛 · ウェーブ · ストレート · カラー · ブリーチ · ハイライト · バレイヤージュ · 外国人対応</p>
+      <p class="profile-tags lang-jp" lang="ja">くせ毛 · ウェーブ · ストレート · カラー · ブリーチ · ハイライト · バレイヤージュ · 外国人対応</p>
       </div><!-- /section-content-delayed -->
     </div>
   </div>
@@ -2326,15 +2269,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="voice-text">"Hikaru took the time to understand my lifestyle before even touching my hair."</p>
       <p class="voice-attr">— Lena R. · ★★★★★</p>
     </div>
-    <div class="voice-card lang-jp">
+    <div class="voice-card lang-jp" lang="ja">
       <p class="voice-text">"流行りではなく、私らしさで切ってくれました。ずっと探してたサロンです。"</p>
       <p class="voice-attr">— Sarah M. · ★★★★★</p>
     </div>
-    <div class="voice-card lang-jp">
+    <div class="voice-card lang-jp" lang="ja">
       <p class="voice-text">"カウンセリングが丁寧で、自分でも気づいていなかったスタイルに出会えました。"</p>
       <p class="voice-attr">— Thomas K. · ★★★★★</p>
     </div>
-    <div class="voice-card lang-jp">
+    <div class="voice-card lang-jp" lang="ja">
       <p class="voice-text">"髪に触れる前に、ライフスタイルを理解しようとしてくれる美容師さんです。"</p>
       <p class="voice-attr">— Lena R. · ★★★★★</p>
     </div>
@@ -2350,9 +2293,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="mc-inner">
     <p class="mc-label">Mood Curator</p>
     <h2 class="mc-hl lang-en">Not sure what you need?</h2>
-    <h2 class="mc-hl lang-jp">メニューに迷ったら？</h2>
+    <h2 class="mc-hl lang-jp" lang="ja">メニューに迷ったら？</h2>
     <p class="mc-desc lang-en">Your mood, instincts, and style — turned into a direction in 3 minutes.</p>
-    <p class="mc-desc lang-jp">着ているもの、日々の気分、直感から、<br class="br-mobile">スタイルの方向性を見つける診断。</p>
+    <p class="mc-desc lang-jp" lang="ja">着ているもの、日々の気分、直感から、<br class="br-mobile">スタイルの方向性を見つける診断。</p>
 
     <div class="mc-preview" id="mc-cards">
       <div class="mc-card" style="transition-delay:0.1s">
@@ -2392,7 +2335,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <a href="https://find.hairisyoursignature.jp/" target="_blank" rel="noopener" class="mc-btn lang-en" id="mc-btn">START DIAGNOSIS</a>
-    <a href="https://find.hairisyoursignature.jp/" target="_blank" rel="noopener" class="mc-btn lang-jp" id="mc-btn-jp">診断してみる</a>
+    <a href="https://find.hairisyoursignature.jp/" target="_blank" rel="noopener" class="mc-btn lang-jp" lang="ja" id="mc-btn-jp">診断してみる</a>
   </div>
 </section>
 
@@ -2448,7 +2391,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 
   <!-- JP Menu -->
-  <div class="lang-jp">
+  <div class="lang-jp" lang="ja">
     <div class="menu-item">
       <span class="menu-num">01</span>
       <div class="menu-name">カット<div class="menu-desc">シャンプー＆ブロー込み。</div></div>
@@ -2511,7 +2454,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p class="mens-price"><strong>All men's haircuts: ¥6,600</strong> (includes shampoo &amp; blow). Color services: see <a href="#service">menu</a>.</p>
   </div>
 
-  <div class="lang-jp mens-wrap">
+  <div class="lang-jp mens-wrap" lang="ja">
     <p class="mens-lead">フェードカット、テクスチャードクロップ、メンズはさみカット、メンズカラーまで。</p>
     <ul class="mens-list">
       <li><strong>フェードカット</strong> — ロー / ミッド / ハイ / スキンフェード / テーパー</li>
@@ -2538,16 +2481,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     Mirror A, 2F GRANDSTATUS Kurihara,<br>
     4-9-8 Koenjiminami, Suginami-ku, Tokyo<br><br>
     <span class="lang-en"><small style="color:var(--muted);">※ Booking via online only</small></span>
-    <span class="lang-jp"><small style="color:var(--muted);">※ご予約はオンラインのみ</small></span>
+    <span class="lang-jp" lang="ja"><small style="color:var(--muted);">※ご予約はオンラインのみ</small></span>
   </p>
   <div class="salon-grid">
     <div class="salon-img-placeholder"><img src="assets/salon-interior.jpg" alt="Interior of HIKARU TERADA private hair salon — a quiet, warm-minimal one-on-one studio (Mirror A) in Koenji, Suginami, Tokyo. 3 minutes walk from Koenji Station." width="800" height="600" loading="lazy" decoding="async"></div>
-    <div class="salon-img-placeholder" style="width: 282px"><img src="assets/keraffect.png" alt="KERAFFECT keratin treatment — a Japanese keratin smoothing service offered at HIKARU TERADA, ideal for color-treated, bleached, or curly hair in Tokyo's humidity." width="600" height="800" loading="lazy" decoding="async" style="object-position: center 30%; object-fit: cover; width: 286px; height: 377px"></div>
+    <div class="salon-img-placeholder" style="width: 282px"><img src="assets/keraffect.jpg" alt="KERAFFECT keratin treatment — a Japanese keratin smoothing service offered at HIKARU TERADA, ideal for color-treated, bleached, or curly hair in Tokyo's humidity." width="600" height="800" loading="lazy" decoding="async" style="object-position: center 30%; object-fit: cover; width: 286px; height: 377px"></div>
   </div>
   <div class="salon-note lang-en">
     A private studio within R_UNDER — all bookings and inquiries directly below.
   </div>
-  <div class="salon-note lang-jp">
+  <div class="salon-note lang-jp" lang="ja">
     R_UNDER内のプライベートスタジオです。ご予約・お問い合わせは下記フォームより直接お願いいたします。
   </div>
   <div class="map-placeholder">
@@ -2560,9 +2503,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
   <div class="map-meta">
     <span class="lang-en">3 min walk · JR Koenji South Exit</span>
-    <span class="lang-jp">JR高円寺駅南口 徒歩3分</span>
+    <span class="lang-jp" lang="ja">JR高円寺駅南口 徒歩3分</span>
     <a href="https://www.google.com/maps/search/?api=1&query=35.703281,139.651021" target="_blank" rel="noopener" class="map-meta-link lang-en">Open in Google Maps →</a>
-    <a href="https://www.google.com/maps/search/?api=1&query=35.703281,139.651021" target="_blank" rel="noopener" class="map-meta-link lang-jp">Google Mapsで開く →</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=35.703281,139.651021" target="_blank" rel="noopener" class="map-meta-link lang-jp" lang="ja">Google Mapsで開く →</a>
   </div>
 </section>
 
@@ -2572,20 +2515,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      ═══════════════════════════════════════════ -->
 <section class="section section-border fade-in" id="sticker">
   <h2 class="section-label label-reveal lang-en" style="visibility:hidden">Sticker</h2>
-  <h2 class="section-label label-reveal lang-jp" style="visibility:hidden">Sticker</h2>
+  <h2 class="section-label label-reveal lang-jp" lang="ja" style="visibility:hidden">Sticker</h2>
   <div class="sticker-section">
-    <video class="sticker-video" autoplay loop muted playsinline>
-      <source src="assets/HAIR_ICONS_STICKER.mp4" type="video/mp4">
+    <video class="sticker-video" loop muted playsinline preload="none">
+      <source data-src="assets/HAIR_ICONS_STICKER.mp4" type="video/mp4">
     </video>
-    <div class="sticker-poster" onclick="this.style.display='none'; this.parentElement.querySelector('.sticker-video').style.display='block'; this.parentElement.querySelector('.sticker-video').play();">
+    <button type="button" class="sticker-poster" aria-label="Play sticker video" onclick="this.style.display='none'; this.parentElement.querySelector('.sticker-video').style.display='block'; this.parentElement.querySelector('.sticker-video').play();">
       <span class="sticker-poster-label">Sticker — one of a kind</span>
-      <div class="sticker-poster-play">
+      <span class="sticker-poster-play" aria-hidden="true">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-      </div>
-    </div>
+      </span>
+    </button>
     <div>
       <p class="sticker-copy lang-en">Every guest receives a complimentary #hairisyoursignature sticker. Each one features a hand-drawn character with a unique hairstyle — the design changes every time. A small reminder that your hair is part of your identity.</p>
-      <p class="sticker-copy lang-jp">ご来店頂いたお客様に#hairisyoursignature ステッカーをお渡ししています。<br>髪型に特徴あるアイコンのキャラクターが描かれています。<br>あなたの髪が、あなたのアイデンティティの一部であることを思い出す小さなきっかけに。</p>
+      <p class="sticker-copy lang-jp" lang="ja">ご来店頂いたお客様に#hairisyoursignature ステッカーをお渡ししています。<br>髪型に特徴あるアイコンのキャラクターが描かれています。<br>あなたの髪が、あなたのアイデンティティの一部であることを思い出す小さなきっかけに。</p>
     </div>
   </div>
 </section>
@@ -2597,16 +2540,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section class="section section-border fade-in" id="faq">
   <h2 class="section-label label-reveal lang-en">FAQ</h2>
   <!-- SEO: handled by FAQPage schema -->
-  <h2 class="section-label label-reveal lang-jp">よくある質問</h2>
+  <h2 class="section-label label-reveal lang-jp" lang="ja">よくある質問</h2>
 
   <div class="lang-en">
-    <div class="faq-tabs">
-      <button class="faq-tab active" onclick="switchFaqTab(this, 'en-previsit')">Before You Visit</button>
-      <button class="faq-tab" onclick="switchFaqTab(this, 'en-hair')">Hair & Services</button>
-      <button class="faq-tab" onclick="switchFaqTab(this, 'en-practical')">Booking & Access</button>
+    <div class="faq-tabs" role="tablist" aria-label="FAQ categories">
+      <button class="faq-tab active" role="tab" aria-selected="true" aria-controls="en-previsit" id="tab-en-previsit" onclick="switchFaqTab(this, 'en-previsit')">Before You Visit</button>
+      <button class="faq-tab" role="tab" aria-selected="false" aria-controls="en-hair" id="tab-en-hair" onclick="switchFaqTab(this, 'en-hair')">Hair & Services</button>
+      <button class="faq-tab" role="tab" aria-selected="false" aria-controls="en-practical" id="tab-en-practical" onclick="switchFaqTab(this, 'en-practical')">Booking & Access</button>
     </div>
 
-    <div class="faq-group active" id="en-previsit">
+    <div class="faq-group active" id="en-previsit" role="tabpanel" aria-labelledby="tab-en-previsit">
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false"><span>Can I get a consultation in English?</span><span class="faq-icon">+</span></button>
         <div class="faq-a">Yes — all consultations and services are in fluent English. I've worked with clients from over 20 countries. No phrasebook needed; we'll have a real conversation about your hair.</div></div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false"><span>Do you understand curly or wavy Western hair?</span><span class="faq-icon">+</span></button>
@@ -2621,7 +2564,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="faq-a">Yes, and it's free. Send photos of your current hair and tell me what you're thinking via Instagram DM (<a href="https://www.instagram.com/hairisyoursignature/" target="_blank">@hairisyoursignature</a>) or email. No commitment needed.</div></div>
     </div>
 
-    <div class="faq-group" id="en-hair">
+    <div class="faq-group" id="en-hair" role="tabpanel" aria-labelledby="tab-en-hair">
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false"><span>How do I deal with humidity frizz in Tokyo?</span><span class="faq-icon">+</span></button>
         <div class="faq-a">Tokyo's humidity is brutal, especially in summer. I offer KERAFFECT keratin treatments (from ¥4,400) that calm frizz without flattening your natural texture. I also walk you through a daily routine that works with the climate here — not against it.</div></div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false"><span>What is a KERAFFECT treatment?</span><span class="faq-icon">+</span></button>
@@ -2636,7 +2579,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="faq-a">A free diagnostic tool that translates your mood, music taste, and visual preferences into a starting point for your hair consultation. Useful if you're not sure what you want. Try it at <a href="https://find.hairisyoursignature.jp/" target="_blank">find.hairisyoursignature.jp</a>.</div></div>
     </div>
 
-    <div class="faq-group" id="en-practical">
+    <div class="faq-group" id="en-practical" role="tabpanel" aria-labelledby="tab-en-practical">
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false"><span>How do I book an appointment?</span><span class="faq-icon">+</span></button>
         <div class="faq-a">English speakers can book online through the scheduling system linked on this site. You can also DM me on Instagram to arrange a time. Walk-ins are not available — appointment only.</div></div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false"><span>How much does a haircut cost?</span><span class="faq-icon">+</span></button>
@@ -2654,14 +2597,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 
-  <div class="lang-jp">
-    <div class="faq-tabs">
-      <button class="faq-tab active" onclick="switchFaqTab(this, 'jp-previsit')">来店前</button>
-      <button class="faq-tab" onclick="switchFaqTab(this, 'jp-hair')">施術・メニュー</button>
-      <button class="faq-tab" onclick="switchFaqTab(this, 'jp-practical')">予約・アクセス</button>
+  <div class="lang-jp" lang="ja">
+    <div class="faq-tabs" role="tablist" aria-label="よくある質問のカテゴリ">
+      <button class="faq-tab active" role="tab" aria-selected="true" aria-controls="jp-previsit" id="tab-jp-previsit" onclick="switchFaqTab(this, 'jp-previsit')">来店前</button>
+      <button class="faq-tab" role="tab" aria-selected="false" aria-controls="jp-hair" id="tab-jp-hair" onclick="switchFaqTab(this, 'jp-hair')">施術・メニュー</button>
+      <button class="faq-tab" role="tab" aria-selected="false" aria-controls="jp-practical" id="tab-jp-practical" onclick="switchFaqTab(this, 'jp-practical')">予約・アクセス</button>
     </div>
 
-    <div class="faq-group active" id="jp-previsit">
+    <div class="faq-group active" id="jp-previsit" role="tabpanel" aria-labelledby="tab-jp-previsit">
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false"><span>カウンセリングはどのくらい時間をかけますか？</span><span class="faq-icon">+</span></button>
         <div class="faq-a">必要な分だけ、髪質や日々のスタイリングについて丁寧にお話を伺います。一般的に5〜15分ほど。事前にInstagram DMでご相談いただくと、当日はさらに短くなります。</div></div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false"><span>メニューに迷っている場合はどうすればいいですか？</span><span class="faq-icon">+</span></button>
@@ -2672,7 +2615,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="faq-a">はい。くせ毛、直毛、細毛、多毛、欧米系の髪質からアジア系まで、15年以上の経験で幅広い髪質に対応しています。</div></div>
     </div>
 
-    <div class="faq-group" id="jp-hair">
+    <div class="faq-group" id="jp-hair" role="tabpanel" aria-labelledby="tab-jp-hair">
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false"><span>髪が長い場合、追加料金はかかりますか？</span><span class="faq-icon">+</span></button>
         <div class="faq-a">カットは¥6,600で長さによる追加はありません。カラーやトリートメントなどの薬剤メニューは、髪の長さや状態によって変動する場合があります。事前にご相談ください。</div></div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false"><span>キャンセルポリシーはありますか？</span><span class="faq-icon">+</span></button>
@@ -2681,7 +2624,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="faq-a">あなたの気分や好みからスタイルの方向性を見つける無料の診断ツールです。<a href="https://find.hairisyoursignature.jp/" target="_blank">find.hairisyoursignature.jp</a>からお試しいただけます。</div></div>
     </div>
 
-    <div class="faq-group" id="jp-practical">
+    <div class="faq-group" id="jp-practical" role="tabpanel" aria-labelledby="tab-jp-practical">
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false"><span>予約方法を教えてください。</span><span class="faq-icon">+</span></button>
         <div class="faq-a">LINE連携の予約システムからご予約いただけます。メニューに迷っている場合は、Instagram DMやメールでの事前相談も受け付けています。</div></div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false"><span>完全予約制ですか？</span><span class="faq-icon">+</span></button>
@@ -2702,13 +2645,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      ═══════════════════════════════════════════ -->
 <section class="booking fade-in" id="booking">
   <h2 class="booking-hl lang-en">Ready when you are.</h2>
-  <h2 class="booking-hl lang-jp">Ready when you are.</h2>
+  <h2 class="booking-hl lang-jp" lang="ja">Ready when you are.</h2>
   <p class="booking-sub lang-en">English-speaking stylist. One-on-one, no rush.<br>Free consultation available via <a href="https://www.instagram.com/hairisyoursignature/" target="_blank" rel="noopener" style="color:var(--text);text-decoration:underline;">Instagram DM</a>.</p>
-  <p class="booking-sub lang-jp">事前相談は<a href="https://www.instagram.com/zonamb/" target="_blank" rel="noopener" style="color:var(--text);text-decoration:underline;">Instagram DM</a>で無料で受け付けています。</p>
+  <p class="booking-sub lang-jp" lang="ja">事前相談は<a href="https://www.instagram.com/zonamb/" target="_blank" rel="noopener" style="color:var(--text);text-decoration:underline;">Instagram DM</a>で無料で受け付けています。</p>
   <div class="booking-buttons lang-en">
     <a href="https://zonamb11111-bit.github.io/kommons-booking/" target="_blank" rel="noopener" class="book-btn book-btn-primary">BOOK NOW</a>
   </div>
-  <div class="booking-buttons lang-jp">
+  <div class="booking-buttons lang-jp" lang="ja">
     <a href="https://zonamb11111-bit.github.io/kommons-booking/" target="_blank" rel="noopener" class="book-btn book-btn-primary">予約する</a>
   </div>
 </section>
@@ -2721,7 +2664,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="footer-tagline">Koenji, Tokyo</span>
     <div class="footer-links">
       <a href="https://www.instagram.com/hairisyoursignature/" target="_blank" rel="noopener" class="lang-en">Instagram</a>
-      <a href="https://www.instagram.com/zonamb/" target="_blank" rel="noopener" class="lang-jp">Instagram</a>
+      <a href="https://www.instagram.com/zonamb/" target="_blank" rel="noopener" class="lang-jp" lang="ja">Instagram</a>
       <a href="https://www.tiktok.com/@hikaruterada" target="_blank" rel="noopener">TikTok</a>
       <a href="https://g.page/r/CT7_5B4h1H3FEBM/review" target="_blank" rel="noopener">Google Reviews</a>
       <a href="https://find.hairisyoursignature.jp/" target="_blank" rel="noopener">Mood Curator</a>
@@ -2803,9 +2746,13 @@ document.querySelectorAll('.slide-left, .slide-right').forEach(el => observerLat
 /* ── FAQ toggle ── */
 function switchFaqTab(btn, groupId) {
   const container = btn.closest('.lang-en, .lang-jp');
-  container.querySelectorAll('.faq-tab').forEach(t => t.classList.remove('active'));
+  container.querySelectorAll('.faq-tab').forEach(t => {
+    t.classList.remove('active');
+    t.setAttribute('aria-selected', 'false');
+  });
   container.querySelectorAll('.faq-group').forEach(g => g.classList.remove('active'));
   btn.classList.add('active');
+  btn.setAttribute('aria-selected', 'true');
   document.getElementById(groupId).classList.add('active');
 }
 
@@ -2958,9 +2905,30 @@ document.querySelectorAll('.ba-card').forEach(card => {
 // Pause all when tab is hidden (battery / CPU)
 document.addEventListener('visibilitychange', () => {
   if (document.hidden) {
-    document.querySelectorAll('.ba-video').forEach(v => v.pause());
+    document.querySelectorAll('.ba-video, .sticker-video').forEach(v => v.pause());
   }
 });
+
+// Lazy-load + autoplay the sticker video when its section enters the viewport
+(function() {
+  const stickerVideo = document.querySelector('.sticker-video');
+  if (!stickerVideo) return;
+  const stickerObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const source = stickerVideo.querySelector('source[data-src]');
+        if (source && !source.src) {
+          source.src = source.dataset.src;
+          stickerVideo.load();
+        }
+        stickerVideo.play().catch(() => {});
+      } else {
+        stickerVideo.pause();
+      }
+    });
+  }, { threshold: [0, 0.4, 1] });
+  stickerObserver.observe(stickerVideo);
+})();
 
 /* ── Parallax: subtle depth on scroll ── */
 let ticking = false;
