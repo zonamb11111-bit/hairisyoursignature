@@ -2496,19 +2496,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <li><strong>Scissor cut</strong> — classic, layered, grown-out men's styles</li>
       <li><strong>Men's color</strong> — single tone, gray blending, subtle highlights</li>
     </ul>
-    <p class="mens-meta">Common bookings: men relocating from London, Berlin, NY who can't find their fade in Tokyo · Japanese clients who want barber-style cuts with English consultation.</p>
+    <p class="mens-meta">Common bookings: men relocating from London, Berlin, NY who can't find their fade in Tokyo · Japanese clients seeking authentic barber-style cuts. Bilingual consultation in English and Japanese.</p>
     <p class="mens-price"><strong>All men's haircuts: ¥6,600</strong> (includes shampoo &amp; blow). Color services: see <a href="#service">menu</a>.</p>
   </div>
 
   <div class="lang-jp mens-wrap">
-    <p class="mens-lead">フェードカット、テクスチャードクロップ、メンズはさみカット、メンズカラーまで。バーバートレーニングを受けた繊細なはさみワークを、チェーン店のような流れ作業ではなく一人ずつ丁寧に。</p>
+    <p class="mens-lead">フェードカット、テクスチャードクロップ、メンズはさみカット、メンズカラーまで。</p>
     <ul class="mens-list">
       <li><strong>フェードカット</strong> — ロー / ミッド / ハイ / スキンフェード / テーパー</li>
       <li><strong>テクスチャードクロップ</strong> — フレンチクロップ / モダンクイフ / メッシークロップ</li>
       <li><strong>はさみカット</strong> — クラシック / レイヤード / 伸ばしかけスタイル</li>
       <li><strong>メンズカラー</strong> — シングルカラー / 白髪ぼかし / さりげないハイライト</li>
     </ul>
-    <p class="mens-meta">London・Berlin・NYからの移住者で「東京で自分のフェードに出会えない」という方や、英語で相談しながらバーバースタイルにしたい日本人客に多くご利用いただいています。</p>
+    <p class="mens-meta">海外から移住してきて「東京で自分に合うフェードに出会えない」という方も、本格的なバーバースタイルを求める日本人の方も、ご利用いただいています。日本語・英語どちらでも丁寧に相談できます。</p>
     <p class="mens-price"><strong>メンズカット 全て ¥6,600</strong>（シャンプー＆ブロー込み）。カラー類は<a href="#service">メニュー</a>参照。</p>
   </div>
 </section>
@@ -2893,13 +2893,13 @@ const baLoadObserver = new IntersectionObserver((entries) => {
   });
 }, { rootMargin: '300px' });
 
-// Autoplay only the card whose center sits in the viewport's center band
-// rootMargin -40% L/R means only the central 20% of the viewport is the active zone
+// Autoplay any card that is at least 40% visible in the viewport
+// (covers both horizontal scroll within the carousel and vertical page scroll)
 const baPlayObserver = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     const video = e.target.querySelector('.ba-video');
     if (!video) return;
-    if (e.isIntersecting) {
+    if (e.intersectionRatio >= 0.4) {
       const source = video.querySelector('source[data-src]');
       if (source && !source.src) {
         source.src = source.dataset.src;
@@ -2910,7 +2910,7 @@ const baPlayObserver = new IntersectionObserver((entries) => {
       video.pause();
     }
   });
-}, { rootMargin: '0px -40% 0px -40%' });
+}, { threshold: [0, 0.4, 0.8, 1] });
 
 document.querySelectorAll('.ba-card').forEach(card => {
   baLoadObserver.observe(card);
