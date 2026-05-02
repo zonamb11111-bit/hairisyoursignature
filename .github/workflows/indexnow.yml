@@ -1,0 +1,116 @@
+name: IndexNow notify on deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (with previous commit)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Resolve changed URLs from diff
+        id: urls
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE="https://www.hairisyoursignature.jp"
+
+          # Files changed vs previous commit (or all on first commit)
+          if git rev-parse HEAD~1 >/dev/null 2>&1; then
+            CHANGED=$(git diff --name-only HEAD~1 HEAD)
+          else
+            CHANGED=$(git ls-files)
+          fi
+          echo "Changed files:"
+          echo "$CHANGED"
+
+          # Map files → public URLs (skip .github, dotfiles, configs)
+          declare -A SEEN
+          URLS=()
+          add() {
+            local u="$1"
+            if [[ -z "${SEEN[$u]:-}" ]]; then
+              SEEN[$u]=1
+              URLS+=("$u")
+            fi
+          }
+
+          for f in $CHANGED; do
+            case "$f" in
+              .github/*|.gitignore|README.md|DESIGN.md|HANDOFF.md|LAUNCH.md) ;;
+              _headers|_redirects) add "$BASE/" ;;
+              index.html) add "$BASE/" ;;
+              koenji-guide.html) add "$BASE/koenji-guide" ;;
+              robots.txt) add "$BASE/robots.txt" ;;
+              sitemap.xml) add "$BASE/sitemap.xml" ;;
+              llms.txt) add "$BASE/llms.txt" ;;
+              assets/*) ;;  # static assets cached long, skip notification
+              *.html) add "$BASE/${f%.html}" ;;
+            esac
+          done
+
+          # If nothing matched, default to homepage
+          if [[ ${#URLS[@]} -eq 0 ]]; then
+            URLS=("$BASE/")
+          fi
+
+          echo "URLs to submit:"
+          printf '  %s\n' "${URLS[@]}"
+
+          # Build JSON array
+          JSON_LIST=$(printf '"%s",' "${URLS[@]}")
+          JSON_LIST="[${JSON_LIST%,}]"
+          echo "url_json=$JSON_LIST" >> "$GITHUB_OUTPUT"
+
+      - name: Wait for Cloudflare Pages deploy
+        run: |
+          echo "Waiting 75s for Cloudflare Pages to publish..."
+          sleep 75
+
+      - name: Verify deploy is live (poll homepage)
+        run: |
+          for i in 1 2 3 4 5 6; do
+            if curl -sf -o /dev/null https://www.hairisyoursignature.jp/; then
+              echo "Homepage 200 OK"
+              break
+            fi
+            echo "Attempt $i: not ready yet, sleeping 10s..."
+            sleep 10
+          done
+
+      - name: Submit URLs to IndexNow
+        env:
+          URL_JSON: ${{ steps.urls.outputs.url_json }}
+        run: |
+          set -euo pipefail
+          PAYLOAD=$(cat <<EOF
+          {
+            "host": "www.hairisyoursignature.jp",
+            "key": "1c48bd18ecd604e956a22a848ac4bc25",
+            "keyLocation": "https://www.hairisyoursignature.jp/1c48bd18ecd604e956a22a848ac4bc25.txt",
+            "urlList": $URL_JSON
+          }
+          EOF
+          )
+          echo "Payload: $PAYLOAD"
+
+          # Bing endpoint (forwards to other IndexNow participants)
+          HTTP_CODE=$(curl -s -o /tmp/indexnow.body -w '%{http_code}' \
+            -X POST 'https://api.indexnow.org/IndexNow' \
+            -H 'Content-Type: application/json; charset=utf-8' \
+            -d "$PAYLOAD")
+          echo "HTTP $HTTP_CODE"
+          cat /tmp/indexnow.body || true
+          # 200/202 = success, 422 = invalid URL (still ok-ish to log)
+          if [[ "$HTTP_CODE" != "200" && "$HTTP_CODE" != "202" ]]; then
+            echo "::warning::IndexNow returned $HTTP_CODE — see body above"
+          fi
