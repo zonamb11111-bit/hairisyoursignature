@@ -26,3 +26,7 @@
 # Apex (non-www) → www  (canonical preservation)
 # Note: also enforced by Cloudflare DNS settings; this is a belt-and-suspenders
 https://hairisyoursignature.jp/*  https://www.hairisyoursignature.jp/:splat  301
+
+# Block exposure of repo metadata (defense-in-depth; Pages may not serve dotfiles by default)
+/.github/*        /404           404
+/.gitignore       /404           404
