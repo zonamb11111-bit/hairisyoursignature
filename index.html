@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google Tag Manager — deferred load to improve LCP/TBT -->
+<!-- Partytown — runs GTM/GA4/Ads in a Web Worker to keep main thread idle -->
+<script>
+  partytown = {
+    forward: ['dataLayer.push', 'gtag', 'fbq']
+  };
+</script>
+<script src="/assets/partytown/partytown.js"></script>
+
+<!-- Google Tag Manager — loaded via Partytown (Worker, not main thread) -->
 <script>
 // Init dataLayer immediately so any code can push events while GTM loads
 window.dataLayer = window.dataLayer || [];
 window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
 
-// Defer the actual GTM script fetch until after page load + browser idle
+// Defer the actual GTM script injection; type="text/partytown" routes to Worker
 (function() {
   function loadGTM() {
     var s = document.createElement('script');
-    s.async = true;
+    s.type = 'text/partytown';
     s.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-PL8XGR2P';
     document.head.appendChild(s);
   }
