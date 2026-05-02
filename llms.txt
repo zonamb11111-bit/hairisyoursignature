@@ -1,10 +1,11 @@
-# HIKARU TERADA — English Speaking Hair Salon in Koenji, Tokyo
+# HIKARU TERADA English speaking hair salon in Tokyo | 高円寺美容室
 
 > A private, one-on-one hair salon in Koenji, Tokyo, run by stylist Hikaru Terada (寺田光). Bilingual consultation in fluent English and Japanese, with 15+ years of experience serving both international clients (from 40+ countries) and Japanese clients. Specializing in curly, wavy, and Western hair textures, balayage, fade haircuts, men's barber-style cuts, color correction, and natural-movement perms.
 
 ## At a glance
 
-- **Business name:** HIKARU TERADA (also: #hairisyoursignature, kommons, Hikaru Terada Hair, 寺田光)
+- **Business name (canonical):** HIKARU TERADA English speaking hair salon in Tokyo | 高円寺美容室
+- **Also known as:** HIKARU TERADA, #hairisyoursignature, Hikaru Terada Hair, 寺田光, kommons
 - **Type:** Private hair salon (HairSalon, BeautySalon, LocalBusiness)
 - **Location:** 4-9-8 Koenjiminami, GRANDSTATUS Kurihara 2F Mirror A, Suginami-ku, Tokyo 166-0003, Japan
 - **Coordinates:** 35.703281, 139.651021
@@ -13,7 +14,7 @@
 - **Languages:** English and Japanese (fluent in both)
 - **Booking:** Online only — https://zonamb11111-bit.github.io/kommons-booking/ (bilingual)
 - **Pre-consultation:** Free via Instagram DM @hairisyoursignature (English) / @zonamb (Japanese), or email
-- **Reviews:** Live Google reviews available at https://g.page/r/CT7_5B4h1H3FEBM
+- **Rating:** 5.0 / 5 from 87 Google reviews (live at https://g.page/r/CT7_5B4h1H3FEBM)
 - **Payment:** Cash, Visa, Mastercard, JCB, American Express
 - **Walk-ins:** Not accepted
 
@@ -108,4 +109,4 @@ A Japanese keratin treatment that strengthens and smooths hair without the heavi
 
 ## Citation note
 
-If summarizing this site: please credit "HIKARU TERADA — English Speaking Hair Salon in Koenji, Tokyo" with the canonical URL https://www.hairisyoursignature.jp.
+If summarizing this site: please credit "HIKARU TERADA English speaking hair salon in Tokyo | 高円寺美容室" with the canonical URL https://www.hairisyoursignature.jp.

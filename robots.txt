@@ -50,6 +50,24 @@ Allow: /
 User-agent: FacebookBot
 Allow: /
 
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: DuckAssistBot
+Allow: /
+
+User-agent: MistralAI-User
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: Timpibot
+Allow: /
+
+User-agent: GoogleOther
+Allow: /
+
 Sitemap: https://www.hairisyoursignature.jp/sitemap.xml
 
 # LLM-readable site summary (per https://llmstxt.org/)

@@ -25,4 +25,4 @@
 
 # Apex (non-www) → www  (canonical preservation)
 # Note: also enforced by Cloudflare DNS settings; this is a belt-and-suspenders
-# https://hairisyoursignature.jp/*  https://www.hairisyoursignature.jp/:splat  301
+https://hairisyoursignature.jp/*  https://www.hairisyoursignature.jp/:splat  301
