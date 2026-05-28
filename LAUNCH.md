@@ -113,7 +113,7 @@ push時に GitHub のユーザ名・パスワード(またはアクセストー�
   ```bash
   curl -I https://hairisyoursignature.pages.dev/booking
   # → HTTP/2 301
-  # → location: https://zonamb11111-bit.github.io/kommons-booking/
+  # → location: https://book.hairisyoursignature.jp/
   ```
 
 問題あれば修正 → push → 自動再デプロイ(40秒程度)。

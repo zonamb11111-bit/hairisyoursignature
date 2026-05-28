@@ -93,7 +93,7 @@ python3 -m http.server 8000
 
 | 用途 | URL / ID | 管理場所 |
 |---|---|---|
-| Booking form (本予約) | `https://zonamb11111-bit.github.io/kommons-booking/` | GitHub Pages 別リポジトリ |
+| Booking form (本予約) | `https://book.hairisyoursignature.jp/` | GitHub Pages 別リポジトリ |
 | Mood Curator | `https://find.hairisyoursignature.jp/` | 別ホスティング |
 | LINE bot | `https://lin.ee/OjJQtyi` | LINE公式アカウント |
 | Mapbox token | `pk.eyJ1Ijoiem9uYW1iIi...` (`koenji-guide.html`内) | https://account.mapbox.com — **URL allowlist必須** |
