@@ -1,0 +1,94 @@
+name: Update Google review stats
+
+# 毎日1回、kommons-gbp GAS の review-stats エンドポイントから
+# Google クチコミの平均評価・件数を取得し、index.html の
+# (a) JSON-LD aggregateRating と (b) 表示テキストを更新する。
+# 数字が変わったときだけ commit→push（Cloudflare Pages が自動再ビルド）。
+
+on:
+  schedule:
+    - cron: '0 20 * * *'   # 20:00 UTC = 翌 05:00 JST
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch review stats from kommons-gbp
+        id: fetch
+        env:
+          ENDPOINT: ${{ secrets.GBP_REVIEW_STATS_URL }}
+          TOKEN: ${{ secrets.GBP_REVIEW_STATS_TOKEN }}
+        run: |
+          set -euo pipefail
+          # GAS Web アプリは 302 で googleusercontent.com に飛ぶので -L で追従
+          resp=$(curl -sSL "${ENDPOINT}?action=review-stats&token=${TOKEN}")
+          echo "raw response: $resp"
+          ok=$(echo "$resp" | jq -r '.ok')
+          if [ "$ok" != "true" ]; then
+            echo "::error::review-stats returned not-ok: $resp"
+            exit 1
+          fi
+          rating=$(echo "$resp" | jq -r '.ratingValue')
+          count=$(echo "$resp" | jq -r '.reviewCount')
+          # sanity check: rating は 0-5 の小数1桁、count は1以上の整数
+          if ! echo "$rating" | grep -Eq '^[0-5](\.[0-9])?$'; then
+            echo "::error::bad ratingValue: $rating"; exit 1
+          fi
+          if ! echo "$count" | grep -Eq '^[0-9]+$' || [ "$count" -lt 1 ]; then
+            echo "::error::bad reviewCount: $count"; exit 1
+          fi
+          echo "rating=$rating" >> "$GITHUB_OUTPUT"
+          echo "count=$count" >> "$GITHUB_OUTPUT"
+
+      - name: Update index.html
+        env:
+          RATING: ${{ steps.fetch.outputs.rating }}
+          COUNT: ${{ steps.fetch.outputs.count }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import os, re
+          rating = os.environ["RATING"]
+          count = os.environ["COUNT"]
+          with open("index.html", encoding="utf-8") as f:
+              html = f.read()
+          # (a) JSON-LD aggregateRating（Google が読む構造化データ・最重要）
+          html, n_a = re.subn(
+              r'("aggregateRating":\{"@type":"AggregateRating","ratingValue":")[^"]*(","reviewCount":")[^"]*(")',
+              lambda m: m.group(1) + rating + m.group(2) + count + m.group(3),
+              html,
+          )
+          # (b) 人が見る表示テキスト
+          html, n_b = re.subn(
+              r'(<dt>Rating</dt><dd>)[0-9.]+ / 5 from [0-9]+ Google reviews(</dd>)',
+              lambda m: m.group(1) + rating + " / 5 from " + count + " Google reviews" + m.group(2),
+              html,
+          )
+          if n_a != 1 or n_b != 1:
+              raise SystemExit(f"unexpected match counts: jsonld={n_a} display={n_b} (expected 1/1)")
+          with open("index.html", "w", encoding="utf-8") as f:
+              f.write(html)
+          print(f"updated jsonld={n_a} display={n_b} -> {rating} / {count}")
+          PY
+
+      - name: Commit if changed
+        env:
+          RATING: ${{ steps.fetch.outputs.rating }}
+          COUNT: ${{ steps.fetch.outputs.count }}
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- index.html; then
+            echo "Review stats unchanged — nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "chore: update Google review stats (${RATING} / ${COUNT})"
+          git push
