@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Anti-clone guard: hairisyoursignature.pro 等の無断複製ドメインで開かれた場合、本物の .jp へ即時転送。GTM等の前に置く。 -->
-<script>(function(){var h=location.hostname.toLowerCase();if(h==='hairisyoursignature.pro'||h.endsWith('.hairisyoursignature.pro')){var real=h.replace(/hairisyoursignature\.pro$/,'hairisyoursignature.jp');location.replace(location.protocol+'//'+real+location.pathname+location.search+location.hash);}})();</script>
+<!-- Anti-clone guard: .pro 等の無断複製ドメインで開かれた場合、本物の .jp へ即時転送。ドメイン書き換え型プロキシに無効化されないよう文字列を分割。GTM等の前に置く。 -->
+<script>(function(){try{var h=location.hostname.toLowerCase();if(h.split('.').pop()===('p'+'r'+'o')){location.replace(location.protocol+'//'+h.slice(0,-3)+('j'+'p')+location.pathname+location.search+location.hash);}}catch(e){}})();</script>
 <!-- Partytown — runs GTM/GA4/Ads in a Web Worker to keep main thread idle -->
 <script>
   partytown = {
