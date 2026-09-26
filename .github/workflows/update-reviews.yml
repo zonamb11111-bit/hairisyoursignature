@@ -8,7 +8,12 @@ name: Update Google review stats
 on:
   schedule:
     - cron: '0 20 * * *'   # 20:00 UTC = 翌 05:00 JST
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      allow_drop:
+        description: 'クチコミ件数の減少を承知の上で反映する（原因を確認済みのときだけ true）'
+        required: false
+        default: 'false'
 
 permissions:
   contents: write
@@ -42,6 +47,14 @@ jobs:
           fi
           if ! echo "$count" | grep -Eq '^[0-9]+$' || [ "$count" -lt 1 ]; then
             echo "::error::bad reviewCount: $count"; exit 1
+          fi
+          # クチコミ死守の見張り：前回（index.html に入っている件数）より3件以上減ったら止める。
+          # 失敗すると GitHub からリポジトリ所有者にメールが届く。サイトの数字は更新しない。
+          prev=$(grep -oE 'const REVIEW_COUNT = [0-9]+' index.html | grep -oE '[0-9]+$' || echo 0)
+          echo "previous count: $prev / new count: $count"
+          if [ "$prev" -gt 0 ] && [ $((prev - count)) -ge 3 ] && [ "${{ github.event.inputs.allow_drop }}" != "true" ]; then
+            echo "::error::Googleクチコミが減少: ${prev} -> ${count}（${prev}から$((prev - count))件減）。GBPの名前・住所変更の直後なら要確認。控え(backupAllReviews)と照合し、必要ならクチコミ移動の窓口へ。原因確認後は allow_drop=true で手動実行"
+            exit 1
           fi
           echo "rating=$rating" >> "$GITHUB_OUTPUT"
           echo "count=$count" >> "$GITHUB_OUTPUT"
