@@ -3,26 +3,37 @@
 <head>
 <!-- Anti-clone guard: .pro 等の無断複製ドメインで開かれた場合、本物の .jp へ即時転送。ドメイン書き換え型プロキシに無効化されないよう文字列を分割。GTM等の前に置く。 -->
 <script>(function(){try{var h=location.hostname.toLowerCase();if(h.split('.').pop()===('p'+'r'+'o')){location.replace(location.protocol+'//'+h.slice(0,-3)+('j'+'p')+location.pathname+location.search+location.hash);}}catch(e){}})();</script>
-<!-- Partytown — runs GTM/GA4/Ads in a Web Worker to keep main thread idle -->
+<!-- Internal-traffic flag: ?internal=1 marks this device as internal (GA4 traffic_type=internal, dropped by the GA4 "Internal Traffic" filter); ?internal=0 clears it. Claude's test links (utm_source=claude-check) are marked automatically. The cookie is shared with book.hairisyoursignature.jp. -->
 <script>
-  partytown = {
-    lib: '/assets/partytown/',
-    forward: ['dataLayer.push', 'gtag', 'fbq']
-  };
+(function(){
+  window.dataLayer = window.dataLayer || [];
+  try {
+    var q = location.search, k = 'hirs_internal';
+    var dom = /(^|\.)hairisyoursignature\.jp$/.test(location.hostname) ? '; domain=.hairisyoursignature.jp' : '';
+    if (/[?&]internal=1(&|$)/.test(q) || /[?&]utm_source=claude-check(&|$)/.test(q)) {
+      document.cookie = k + '=1' + dom + '; path=/; max-age=63072000; SameSite=Lax; Secure';
+    } else if (/[?&]internal=0(&|$)/.test(q)) {
+      document.cookie = k + '=' + dom + '; path=/; max-age=0; SameSite=Lax; Secure';
+    }
+    if (/(?:^|;\s*)hirs_internal=1(?:;|$)/.test(document.cookie)) {
+      window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
+      window.gtag('set', { traffic_type: 'internal' });
+    }
+  } catch (e) {}
+})();
 </script>
-<script src="/assets/partytown/partytown.js"></script>
 
-<!-- Google Tag Manager — loaded via Partytown (Worker, not main thread) -->
+<!-- Google Tag Manager — loaded on the main thread after the page has finished loading (keeps first paint fast).
+     Previously routed through Partytown, but GA4 hits never left the Web Worker (LP page_views were 0 in GA4). -->
 <script>
-// Init dataLayer immediately so any code can push events while GTM loads
 window.dataLayer = window.dataLayer || [];
 window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
 
-// Defer the actual GTM script injection; type="text/partytown" routes to Worker
+// Defer the GTM script injection until after load / idle
 (function() {
   function loadGTM() {
     var s = document.createElement('script');
-    s.type = 'text/partytown';
+    s.async = true;
     s.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-PL8XGR2P';
     document.head.appendChild(s);
   }
