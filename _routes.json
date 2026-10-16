@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "include": [
+    "/HANDOFF.md",
+    "/LAUNCH.md",
+    "/DESIGN.md",
+    "/README.md",
+    "/automation/*",
+    "/.github/*",
+    "/.gitignore"
+  ],
+  "exclude": []
+}
