@@ -93,6 +93,15 @@ jobs:
               raise SystemExit(f"unexpected match counts: jsonld={n_a} display={n_b} jsconst={n_c} (expected 1/1/1)")
           with open("index.html", "w", encoding="utf-8") as f:
               f.write(html)
+          # (d) llms.txt（AI向けの要約。2026-10-18 追加＝ここが104件のまま古くなっていた）
+          with open("llms.txt", encoding="utf-8") as f:
+              llms = f.read()
+          llms, n_d = re.subn(r'[0-9.]+( / 5 from )[0-9]+( Google reviews)', lambda m: rating + m.group(1) + count + m.group(2), llms)
+          llms, n_e = re.subn(r'[0-9.]+(-star rating from )[0-9]+( Google reviews)', lambda m: rating + m.group(1) + count + m.group(2), llms)
+          if n_d != 1 or n_e != 1:
+              raise SystemExit(f"unexpected llms.txt match counts: rating={n_d} faq={n_e} (expected 1/1)")
+          with open("llms.txt", "w", encoding="utf-8") as f:
+              f.write(llms)
           print(f"updated jsonld={n_a} display={n_b} jsconst={n_c} -> {rating} / {count}")
           PY
 
@@ -102,12 +111,12 @@ jobs:
           COUNT: ${{ steps.fetch.outputs.count }}
         run: |
           set -euo pipefail
-          if git diff --quiet -- index.html; then
+          if git diff --quiet -- index.html llms.txt; then
             echo "Review stats unchanged — nothing to commit."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add index.html
+          git add index.html llms.txt
           git commit -m "chore: update Google review stats (${RATING} / ${COUNT})"
           git push
